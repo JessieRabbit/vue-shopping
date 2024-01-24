@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Dashboard from '@/components/Dashboard.vue';
-import ShoppingCart from '@/views/ShoppingCart.vue';
+// import Dashboard from '@/components/Dashboard.vue';
+import ShoppingIndex from '@/views/ShoppingIndex.vue';
 
 Vue.use(VueRouter);
 
@@ -9,20 +9,22 @@ const routes = [
   // 輸入不存在頁面導到購物首頁
   {
     path: '*',
-    redirect: 'shoppingCart',
+    redirect: '/',
   },
   {
     path: '/',
-    name: 'Dashboard',
-    component: Dashboard,
-    children: [
-      {
-        path: 'shoppingCart',
-        name: 'ShoppingCart',
-        component: ShoppingCart,
-        meta: { requiresAuth: true },
-      },
-    ],
+    name: 'ShoppingIndex',
+    component: ShoppingIndex,
+    // path: '/',
+    // name: 'Dashboard',
+    // component: Dashboard,
+    // children: [
+    //   {
+    //     path: 'shoppingCart',
+    //     name: 'ShoppingCart',
+    //     component: ShoppingCart,
+    //   },
+    // ],
   },
 ];
 

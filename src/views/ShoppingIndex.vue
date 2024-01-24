@@ -2,18 +2,18 @@
 <template>
   <div>
     <!-- Spinner Start -->
-    <!-- <div
+    <div
       id="spinner"
       class="show w-100 vh-100 bg-white position-fixed
       translate-middle top-50 start-50 d-flex
       align-items-center justify-content-center"
     >
       <div class="spinner-grow text-primary" role="status"></div>
-    </div> -->
+    </div>
     <!-- Spinner End -->
 
     <!-- Navbar start -->
-    <div class="container-fluid fixed-top">
+    <div class="container-fluid fixed-top" @scroll="handleScroll">
       <div class="container topbar bg-primary d-none d-lg-block">
         <div class="d-flex justify-content-between">
           <div class="top-info ps-2">
@@ -1731,79 +1731,109 @@ export default {
   data() {
     return {};
   },
-  methods: {},
-  created() {
-    $(document).ready(() => {
-      // vegetable carousel
-      $('.vegetable-carousel').owlCarousel({
-        autoplay: true,
-        smartSpeed: 1500,
-        center: false,
-        dots: true,
-        loop: true,
-        margin: 25,
-        nav: true,
-        navText: ['<i class="bi bi-arrow-left"></i>', '<i class="bi bi-arrow-right"></i>'],
-        navClass: ['owl-prev-btn', 'owl-next-btn'],
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 1,
+  methods: {
+    // loading spinner
+    spinnerEventListener() {
+      const spinner = () => {
+        setTimeout(() => {
+          if ($('#spinner').length > 0) {
+            $('#spinner').removeClass('show');
+          }
+        }, 1);
+      };
+      spinner(0);
+    },
+    // nav scroll
+    handleScroll() {
+      const navheader = document.querySelector('.fixed-top');
+      if ($(window).width() < 992) {
+        if (window.scrollY > 55) {
+          navheader.classList.add('shadow');
+        } else {
+          navheader.classList.remove('shadow');
+        }
+      } else if (window.scrollY > 55) {
+        navheader.classList.add('shadow');
+        navheader.style.top = '-55px';
+      } else {
+        navheader.classList.remove('shadow');
+        navheader.style.top = '0px';
+      }
+    },
+    // 輪播設定
+    owlCarouselSetting() {
+      $(document).ready(() => {
+        // vegetable carousel
+        $('.vegetable-carousel').owlCarousel({
+          autoplay: true,
+          smartSpeed: 1500,
+          center: false,
+          dots: true,
+          loop: true,
+          margin: 25,
+          nav: true,
+          navText: ['<i class="bi bi-arrow-left"></i>', '<i class="bi bi-arrow-right"></i>'],
+          navClass: ['owl-prev-btn', 'owl-next-btn'],
+          responsiveClass: true,
+          responsive: {
+            0: {
+              items: 1,
+            },
+            576: {
+              items: 1,
+            },
+            768: {
+              items: 2,
+            },
+            992: {
+              items: 3,
+            },
+            1200: {
+              items: 4,
+            },
           },
-          576: {
-            items: 1,
-          },
-          768: {
-            items: 2,
-          },
-          992: {
-            items: 3,
-          },
-          1200: {
-            items: 4,
-          },
-        },
-      });
+        });
 
-      // Testimonial carousel
-      $('.testimonial-carousel').owlCarousel({
-        autoplay: true,
-        smartSpeed: 2000,
-        center: false,
-        dots: true,
-        loop: true,
-        margin: 25,
-        nav: true,
-        navText: ['<i class="bi bi-arrow-left"></i>', '<i class="bi bi-arrow-right"></i>'],
-        navClass: ['owl-prev-btn', 'owl-next-btn'],
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 1,
+        // Testimonial carousel
+        $('.testimonial-carousel').owlCarousel({
+          autoplay: true,
+          smartSpeed: 2000,
+          center: false,
+          dots: true,
+          loop: true,
+          margin: 25,
+          nav: true,
+          navText: ['<i class="bi bi-arrow-left"></i>', '<i class="bi bi-arrow-right"></i>'],
+          navClass: ['owl-prev-btn', 'owl-next-btn'],
+          responsiveClass: true,
+          responsive: {
+            0: {
+              items: 1,
+            },
+            576: {
+              items: 1,
+            },
+            768: {
+              items: 1,
+            },
+            992: {
+              items: 2,
+            },
+            1200: {
+              items: 2,
+            },
           },
-          576: {
-            items: 1,
-          },
-          768: {
-            items: 1,
-          },
-          992: {
-            items: 2,
-          },
-          1200: {
-            items: 2,
-          },
-        },
+        });
       });
-    });
+    },
+  },
+  created() {
+    this.spinnerEventListener();
+    window.addEventListener('scroll', this.handleScroll);
+    this.owlCarouselSetting();
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
 };
 </script>
-
-<style scoped lang="scss">
-#testimonial .owl-carousel .owl-nav button.owl-next {
-  color: var(--bs-primary) !important;
-  padding: 5px 25px !important;
-  border: 1px solid var(--bs-secondary) !important;
-}
-</style>

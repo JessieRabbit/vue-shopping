@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = defineConfig({
   transpileDependencies: true,
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/vue-dashboard-record/'
+    ? '/vue-fruit-shopping/'
     : '/',
   configureWebpack: {
     plugins: [
