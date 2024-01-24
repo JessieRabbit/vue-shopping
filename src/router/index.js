@@ -1,22 +1,28 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import Dashboard from '@/components/Dashboard.vue';
+import ShoppingCart from '@/views/ShoppingCart.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
+  // 輸入不存在頁面導到購物首頁
   {
-    path: '/',
-    name: 'home',
-    component: HomeView,
+    path: '*',
+    redirect: 'shoppingCart',
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    path: '/',
+    name: 'Dashboard',
+    component: Dashboard,
+    children: [
+      {
+        path: 'shoppingCart',
+        name: 'ShoppingCart',
+        component: ShoppingCart,
+        meta: { requiresAuth: true },
+      },
+    ],
   },
 ];
 
