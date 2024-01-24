@@ -130,8 +130,10 @@
 
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active,
+.navbar .navbar-nav .nav-link.router-link-exact-active,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link:hover,
-.fixed-top.bg-white .navbar .navbar-nav .nav-link.active {
+.fixed-top.bg-white .navbar .navbar-nav .nav-link.active,
+.fixed-top.bg-white .navbar .navbar-nav .nav-link.router-link-exact-active {
   color: var(--bs-primary);
 }
 
@@ -157,6 +159,7 @@
   }
 }
 
+.dropdown .dropdown-menu a.router-link-exact-active,
 .dropdown .dropdown-menu a:hover {
   background: var(--bs-secondary);
   color: var(--bs-primary);
