@@ -2,8 +2,9 @@
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
   <div>
-    <div class="container-fluid contact py-5">
-      <div class="container py-5" style="width: 20%">
+    <Navbar/>
+    <div class="container-fluid contact py-5" style="margin-top: 152px">
+      <div class="container py-5" style="width: 60%">
         <div class="p-5 bg-light rounded">
           <div class="row g-4">
             <div class="col-12">
@@ -43,11 +44,19 @@
         </div>
       </div>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue';
+import Footer from '@/components/Footer.vue';
+
 export default {
   name: 'LoginPage',
+  components: {
+    Navbar,
+    Footer,
+  },
 };
 </script>
