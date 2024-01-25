@@ -70,7 +70,7 @@
               >
                 <i class="fas fa-search text-primary"></i>
               </button>
-              <a href="#" class="position-relative me-4 my-auto">
+              <a href="/page/cart" class="position-relative me-4 my-auto">
                 <i class="fa fa-shopping-bag fa-2x"></i>
                 <span class="position-absolute bg-secondary
                   rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
@@ -78,7 +78,7 @@
                   3
                 </span>
               </a>
-              <a href="#" class="my-auto" aria-label="Auto">
+              <a href="/login" class="my-auto" aria-label="Auto">
                 <i class="fas fa-user fa-2x"></i>
               </a>
             </div>

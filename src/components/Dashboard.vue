@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- Loading Spinner Start -->
+    <Spinner/>
+    <!-- Loading Spinner End -->
     <Navbar/>
     <Breadcrumb :currentPage="currentPage"/>
     <main>
@@ -14,6 +17,7 @@
 </template>
 
 <script>
+import Spinner from '@/components/Spinner.vue';
 import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 import Breadcrumb from './Breadcrumb.vue';
@@ -22,6 +26,7 @@ import SearchModal from './SearchModal.vue';
 export default {
   name: 'DashboardView',
   components: {
+    Spinner,
     Navbar,
     Footer,
     Breadcrumb,

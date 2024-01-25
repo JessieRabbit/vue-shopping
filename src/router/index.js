@@ -69,6 +69,8 @@ const routes = [
 ];
 
 const router = new VueRouter({
+  // remove hashbang #! from url 參考 https://stackoverflow.com/questions/34623833/vue-js-how-to-remove-hashbang-from-url
+  mode: 'history',
   routes,
 });
 

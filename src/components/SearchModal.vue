@@ -19,17 +19,7 @@
             ></button>
           </div>
           <div class="modal-body d-flex align-items-center">
-            <div class="input-group w-75 mx-auto d-flex">
-              <input
-                type="search"
-                class="form-control p-3"
-                placeholder="keywords"
-                aria-describedby="search-icon-1"
-              />
-              <span id="search-icon-1" class="input-group-text p-3">
-                <i class="fa fa-search"></i>
-              </span>
-            </div>
+              <KeyWord class="w-75"/>
           </div>
         </div>
       </div>
@@ -38,9 +28,12 @@
 </template>
 
 <script>
+import KeyWord from './KeyWord.vue';
+
 export default {
   name: 'SearchModal',
-  created() {
+  components: {
+    KeyWord,
   },
 };
 </script>
