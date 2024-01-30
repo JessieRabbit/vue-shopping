@@ -31,18 +31,18 @@
             <div class="col-lg-3">
               <div class="d-flex justify-content-end pt-3">
                 <a class="btn btn-outline-secondary me-2
-                btn-md-square rounded-circle" href="" aria-label="Twitter">
+                btn-md-square rounded-circle" href="#" aria-label="Twitter">
                   <i class="fab fa-twitter"></i>
                 </a>
                 <a class="btn btn-outline-secondary
-                me-2 btn-md-square rounded-circle" href="" aria-label="Facebook">
+                me-2 btn-md-square rounded-circle" href="#" aria-label="Facebook">
                   <i class="fab fa-facebook-f"></i>
                 </a>
                 <a class="btn btn-outline-secondary me-2
-                btn-md-square rounded-circle" href="" aria-label="Youtube">
+                btn-md-square rounded-circle" href="#" aria-label="Youtube">
                   <i class="fab fa-youtube"></i>
                 </a>
-                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""
+                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href="#"
                 aria-label="Linkedin">
                   <i class="fab fa-linkedin-in"></i>
                 </a>
@@ -55,12 +55,21 @@
             <div class="footer-item">
               <h4 class="text-light mb-3">Why People Like us!</h4>
               <p class="mb-4">
-                typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                the like Aldus PageMaker including of Lorem Ipsum.
+                Jessie 蔬果行有別於一般菜商，有著集產地、批發商、菜商的角色，
+                是少數能夠直接供應給各大蔬果行的業者，
+                Jessie 蔬果源自台北社子島發跡、產地自產自銷。
+                當時的時空環境
+                南北建設與交通運輸並不發達，
+                早先台北農產運銷公司尚未成立，
+                台北社子島可說是當時大台北蔬菜產區，
+                專供北台灣蔬果使用。隨著時間演變至今，產量減少，
+                改至目前南部產地專人種植、專人採買、產銷一條龍，
+                時至今日也有著 4、50 年累積的經驗。
               </p>
-              <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary"
-                >Read More</a
-              >
+              <a href="/page/contact"
+                class="btn border-secondary py-2 px-4 rounded-pill text-primary">
+                Read More
+              </a>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
@@ -103,16 +112,16 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-            <span class="text-light"
-              ><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All
-              right reserved.</span
-            >
+            <span class="text-light">
+              <a href="#"><i class="fas fa-copyright text-light me-2"></i>Jessie</a>, All
+              right reserved.
+            </span>
           </div>
           <div class="col-md-6 my-auto text-center text-md-end text-white">
             Designed By
-            <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+            <a class="border-bottom" href="#">Jessie</a>
             Distributed By
-            <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+            <a class="border-bottom" href="#">Shen Family</a>
           </div>
         </div>
       </div>

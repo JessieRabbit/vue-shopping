@@ -15,21 +15,20 @@
               ></i>
               <div class="mb-4 pb-4 border-bottom border-secondary">
                 <p class="mb-0">
-                  Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's
-                  standard dummy text ever since the 1500s,
+                  展示的水果都是台灣日本高級水果，買了一盒高雄黑糖芭比蓮霧，很好吃～
                 </p>
               </div>
               <div class="d-flex align-items-center flex-nowrap">
                 <div class="bg-secondary rounded">
                   <img
-                    src="@/assets/img/testimonial-1.jpg"
+                    src="https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGF2YXRhcnxlbnwwfHwwfHx8Mg%3D%3D"
                     class="img-fluid rounded"
                     style="width: 100px; height: 100px"
                     alt=""
                   />
                 </div>
                 <div class="ms-4 d-block">
-                  <h4 class="text-dark">Client Name</h4>
+                  <h4 class="text-dark">Alice</h4>
                   <p class="m-0 pb-3">Profession</p>
                   <div class="d-flex pe-5">
                     <i class="fas fa-star text-primary"></i>
@@ -50,21 +49,21 @@
               ></i>
               <div class="mb-4 pb-4 border-bottom border-secondary">
                 <p class="mb-0">
-                  Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's
-                  standard dummy text ever since the 1500s,
+                  很欣賞店家對品質的講究,原先在line客服臨時詢問當日是否有櫻桃禮盒,
+                  店家說中午會進貨,中午通知我因為品質不好沒有進貨,店家主動說要配合我明天送禮的時間提前交付給我
                 </p>
               </div>
               <div class="d-flex align-items-center flex-nowrap">
                 <div class="bg-secondary rounded">
                   <img
-                    src="@/assets/img/testimonial-1.jpg"
+                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHwy"
                     class="img-fluid rounded"
                     style="width: 100px; height: 100px"
                     alt=""
                   />
                 </div>
                 <div class="ms-4 d-block">
-                  <h4 class="text-dark">Client Name</h4>
+                  <h4 class="text-dark">Josh</h4>
                   <p class="m-0 pb-3">Profession</p>
                   <div class="d-flex pe-5">
                     <i class="fas fa-star text-primary"></i>
@@ -85,21 +84,20 @@
               ></i>
               <div class="mb-4 pb-4 border-bottom border-secondary">
                 <p class="mb-0">
-                  Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's
-                  standard dummy text ever since the 1500s,
+                  很有質感的蔬果店價格透明，品質優良
                 </p>
               </div>
               <div class="d-flex align-items-center flex-nowrap">
                 <div class="bg-secondary rounded">
                   <img
-                    src="@/assets/img/testimonial-1.jpg"
+                    src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHwy"
                     class="img-fluid rounded"
                     style="width: 100px; height: 100px"
                     alt=""
                   />
                 </div>
                 <div class="ms-4 d-block">
-                  <h4 class="text-dark">Client Name</h4>
+                  <h4 class="text-dark">Daniel</h4>
                   <p class="m-0 pb-3">Profession</p>
                   <div class="d-flex pe-5">
                     <i class="fas fa-star text-primary"></i>
