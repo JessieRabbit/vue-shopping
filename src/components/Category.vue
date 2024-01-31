@@ -5,32 +5,18 @@
       <ul class="list-unstyled fruite-categorie">
         <li>
           <div class="d-flex justify-content-between fruite-name">
-            <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-            <span>(3)</span>
+            <a href="#" @click.prevent="$emit('categoryEvent', '')">
+              <i class="fas fa-apple-alt me-2"></i>All Products
+            </a>
+            <span>({{ products.length }})</span>
           </div>
         </li>
-        <li>
+        <li v-for="(categoryItem, i) in categories" :key="i">
           <div class="d-flex justify-content-between fruite-name">
-            <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-            <span>(5)</span>
-          </div>
-        </li>
-        <li>
-          <div class="d-flex justify-content-between fruite-name">
-            <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-            <span>(2)</span>
-          </div>
-        </li>
-        <li>
-          <div class="d-flex justify-content-between fruite-name">
-            <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-            <span>(8)</span>
-          </div>
-        </li>
-        <li>
-          <div class="d-flex justify-content-between fruite-name">
-            <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-            <span>(5)</span>
+            <a href="#" @click.prevent="$emit('categoryEvent', categoryItem.category)">
+              <i class="fas fa-apple-alt me-2"></i>{{ categoryItem.category }}
+            </a>
+            <span>({{ categoryItem.count }})</span>
           </div>
         </li>
       </ul>
@@ -41,5 +27,18 @@
 <script>
 export default {
   name: 'CategoryView',
+  props: {
+    products: Array,
+  },
+  computed: {
+    // 組 category 資料
+    categories() {
+      const data = ['Vegetables', 'Fruits', 'Bread', 'Meat'];
+      return data.map((el) => ({
+        category: el,
+        count: this.products.filter((it) => it.category === el).length,
+      }));
+    },
+  },
 };
 </script>

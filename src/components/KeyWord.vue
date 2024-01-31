@@ -6,8 +6,11 @@
       class="form-control p-3"
       placeholder="keywords"
       aria-describedby="search-icon-1"
+      v-model="keyword"
     />
-    <span id="search-icon-1" class="input-group-text p-3">
+    <span id="search-icon-1" class="input-group-text p-3"
+      @click.prevent="$emit('checkProductsTilte', keyword)"
+      @keyup.enter="$emit('checkProductsTilte', keyword)">
       <i class="fa fa-search"></i>
     </span>
   </div>
@@ -16,5 +19,10 @@
 <script>
 export default {
   name: 'KeyWord',
+  data() {
+    return {
+      keyword: '',
+    };
+  },
 };
 </script>

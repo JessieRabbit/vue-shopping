@@ -201,35 +201,37 @@
                   <div class="row g-4">
                     <div class="col-md-6 col-lg-4 col-xl-3"
                       v-for="item in filterProducts" :key="item.id">
-                      <div class="fruite-img">
-                        <img
-                          :src="item.imageUrl"
-                          class="img-fluid w-100 rounded-top"
-                          alt=""
-                        />
-                      </div>
-                      <div
-                        class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                        style="top: 10px; left: 10px"
-                      >
-                        {{ item.category }}
-                      </div>
-                      <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                        <h4>{{ item.title }}</h4>
-                        <p>
-                          {{ item.description}}
-                        </p>
-                        <div class="d-flex justify-content-between flex-lg-wrap">
-                          <p class="text-dark fs-5 fw-bold mb-0">
-                            ${{ item.price }} / {{ item.unit }}
+                      <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                          <img
+                            :src="item.imageUrl"
+                            class="img-fluid w-100 rounded-top"
+                            alt=""
+                          />
+                        </div>
+                        <div
+                          class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                          style="top: 10px; left: 10px"
+                        >
+                          {{ item.category }}
+                        </div>
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                          <h4>{{ item.title }}</h4>
+                          <p>
+                            {{ item.description}}
                           </p>
-                          <a
-                            href="#"
-                            class="btn border border-secondary rounded-pill px-3 text-primary"
-                          >
-                            <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                            Add to cart
-                          </a>
+                          <div class="d-flex justify-content-between flex-lg-wrap">
+                            <p class="text-dark fs-5 fw-bold mb-0">
+                              ${{ item.price }} / {{ item.unit }}
+                            </p>
+                            <a
+                              href="#"
+                              class="btn border border-secondary rounded-pill px-3 text-primary"
+                            >
+                              <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                              Add to cart
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -493,6 +495,7 @@ export default {
     },
   },
   methods: {
+    // 取得商品列表_all
     getProducts() {
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products`;
       const vm = this;
