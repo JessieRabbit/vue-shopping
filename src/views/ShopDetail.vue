@@ -1,36 +1,43 @@
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
   <div>
+    <!-- Loading Spinner Start -->
+    <Spinner :isLoading="isLoading"/>
+    <!-- Loading Spinner End -->
     <div class="container-fluid py-5 mt-5">
       <div class="container py-5">
+        <a
+          href="javascript:void(0)"
+          class="btn border border-secondary
+          px-4 py-3 rounded-pill text-primary mb-2"
+          @click.prevent="gotoShop"
+        >
+          <i class="bi bi-arrow-left"></i>
+          回到產品列表
+        </a>
         <div class="row g-4 mb-5">
           <div class="col-lg-8 col-xl-9">
             <div class="row g-4">
               <div class="col-lg-6">
                 <div class="border rounded">
-                  <a href="#">
-                    <img src="@/assets/img/single-item.jpg" class="img-fluid rounded" alt="Image" />
+                  <a href="javascript:void(0);">
+                    <img :src="product.imageUrl" class="img-fluid rounded" alt="Image" />
                   </a>
                 </div>
               </div>
               <div class="col-lg-6">
-                <h4 class="fw-bold mb-3">Brocoli</h4>
-                <p class="mb-3">Category: Vegetables</p>
-                <h5 class="fw-bold mb-3">3,35 $</h5>
+                <h4 class="fw-bold mb-3">{{ product.title }}</h4>
+                <p class="mb-3">Category: {{ product.category }}</p>
+                <h5 class="fw-bold mb-3">${{ product.price }}</h5>
                 <div class="d-flex mb-4">
                   <i class="fa fa-star text-secondary"></i>
                   <i class="fa fa-star text-secondary"></i>
                   <i class="fa fa-star text-secondary"></i>
                   <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star text-secondary"></i>
                 </div>
                 <p class="mb-4">
-                  The generated Lorem Ipsum is therefore always free from repetition injected
-                  humour, or non-characteristic words etc.
-                </p>
-                <p class="mb-4">
-                  Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain
-                  pickerel hatchetfish, pencilfish snailfish
+                  {{ product.description }}
                 </p>
                 <div class="input-group quantity mb-5" style="width: 100px">
                   <div class="input-group-btn">
@@ -49,11 +56,12 @@
                     </button>
                   </div>
                 </div>
-                <a
-                  href="#"
+                <a href="javascript:void(0);"
                   class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
+                  @click.prevent="$emit('emitAddtoCart', product)"
                 >
-                  <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                  <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                  Add to cart
                 </a>
               </div>
               <div class="col-lg-12">
@@ -71,18 +79,6 @@
                     >
                       Description
                     </button>
-                    <button
-                      class="nav-link border-white border-bottom-0"
-                      type="button"
-                      role="tab"
-                      id="nav-mission-tab"
-                      data-bs-toggle="tab"
-                      data-bs-target="#nav-mission"
-                      aria-controls="nav-mission"
-                      aria-selected="false"
-                    >
-                      Reviews
-                    </button>
                   </div>
                 </nav>
                 <div class="tab-content mb-5">
@@ -93,215 +89,16 @@
                     aria-labelledby="nav-about-tab"
                   >
                     <p>
-                      The generated Lorem Ipsum is therefore always free from repetition injected
-                      humour, or non-characteristic words etc. Susp endisse ultricies nisi vel quam
-                      suscipit
-                    </p>
-                    <p>
-                      Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish
-                      filefish Antarctic icefish goldeye aholehole trumpetfish pilot fish
-                      airbreathing catfish, electric ray sweeper.
-                    </p>
-                    <div class="px-2">
-                      <div class="row g-4">
-                        <div class="col-6">
-                          <div
-                            class="row bg-light align-items-center
-                            text-center justify-content-center py-2"
-                          >
-                            <div class="col-6">
-                              <p class="mb-0">Weight</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">1 kg</p>
-                            </div>
-                          </div>
-                          <div
-                            class="row text-center align-items-center justify-content-center py-2"
-                          >
-                            <div class="col-6">
-                              <p class="mb-0">Country of Origin</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">Agro Farm</p>
-                            </div>
-                          </div>
-                          <div
-                            class="row bg-light text-center
-                            align-items-center justify-content-center py-2"
-                          >
-                            <div class="col-6">
-                              <p class="mb-0">Quality</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">Organic</p>
-                            </div>
-                          </div>
-                          <div
-                            class="row text-center align-items-center justify-content-center py-2"
-                          >
-                            <div class="col-6">
-                              <p class="mb-0">Check</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">Healthy</p>
-                            </div>
-                          </div>
-                          <div
-                            class="row bg-light text-center
-                            align-items-center justify-content-center py-2"
-                          >
-                            <div class="col-6">
-                              <p class="mb-0">Min Weight</p>
-                            </div>
-                            <div class="col-6">
-                              <p class="mb-0">250 Kg</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="tab-pane"
-                    id="nav-mission"
-                    role="tabpanel"
-                    aria-labelledby="nav-mission-tab"
-                  >
-                    <div class="d-flex">
-                      <img
-                        src="@/assets/img/avatar.jpg"
-                        class="img-fluid rounded-circle p-3"
-                        style="width: 100px; height: 100px"
-                        alt=""
-                      />
-                      <div class="">
-                        <p class="mb-2" style="font-size: 14px">April 12, 2024</p>
-                        <div class="d-flex justify-content-between">
-                          <h5>Jason Smith</h5>
-                          <div class="d-flex mb-3">
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star"></i>
-                          </div>
-                        </div>
-                        <p>
-                          The generated Lorem Ipsum is therefore always free from repetition
-                          injected humour, or non-characteristic words etc. Susp endisse ultricies
-                          nisi vel quam suscipit
-                        </p>
-                      </div>
-                    </div>
-                    <div class="d-flex">
-                      <img
-                        src="@/assets/img/avatar.jpg"
-                        class="img-fluid rounded-circle p-3"
-                        style="width: 100px; height: 100px"
-                        alt=""
-                      />
-                      <div class="">
-                        <p class="mb-2" style="font-size: 14px">April 12, 2024</p>
-                        <div class="d-flex justify-content-between">
-                          <h5>Sam Peters</h5>
-                          <div class="d-flex mb-3">
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </div>
-                        </div>
-                        <p class="text-dark">
-                          The generated Lorem Ipsum is therefore always free from repetition
-                          injected humour, or non-characteristic words etc. Susp endisse ultricies
-                          nisi vel quam suscipit
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="nav-vision" role="tabpanel">
-                    <p class="text-dark">
-                      Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu
-                      diam amet diam et eos labore. 3
-                    </p>
-                    <p class="mb-0">
-                      Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita
-                      erat ipsum et lorem et sit
+                      {{ product.content }}
                     </p>
                   </div>
                 </div>
               </div>
-              <form action="#">
-                <h4 class="mb-5 fw-bold">Leave a Reply</h4>
-                <div class="row g-4">
-                  <div class="col-lg-6">
-                    <div class="border-bottom rounded">
-                      <input
-                        type="text"
-                        class="form-control border-0 me-4"
-                        placeholder="Yur Name *"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div class="border-bottom rounded">
-                      <input
-                        type="email"
-                        class="form-control border-0"
-                        placeholder="Your Email *"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-lg-12">
-                    <div class="border-bottom rounded my-4">
-                      <textarea
-                        name=""
-                        id=""
-                        class="form-control border-0"
-                        cols="30"
-                        rows="8"
-                        placeholder="Your Review *"
-                        spellcheck="false"
-                      ></textarea>
-                    </div>
-                  </div>
-                  <div class="col-lg-12">
-                    <div class="d-flex justify-content-between py-3 mb-5">
-                      <div class="d-flex align-items-center">
-                        <p class="mb-0 me-3">Please rate:</p>
-                        <div class="d-flex align-items-center" style="font-size: 12px">
-                          <i class="fa fa-star text-muted"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                      </div>
-                      <a
-                        href="#"
-                        class="btn border border-secondary text-primary rounded-pill px-4 py-3"
-                      >
-                        Post Comment
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </form>
             </div>
           </div>
           <div class="col-lg-4 col-xl-3">
-            <div class="row g-4 fruite">
-              <div class="col-lg-12">
-                <KeyWord class="w-100" />
-              </div>
-              <div class="mb-4">
-                <Category />
-              </div>
-            </div>
             <div class="col-lg-12">
-              <FeatureProducts />
+              <FeatureProducts :featureProducts = featureProducts />
             </div>
             <div class="col-lg-12">
               <Banner/>
@@ -309,14 +106,16 @@
           </div>
         </div>
       </div>
-      <FreshOrganic/>
+      <FreshOrganic v-if="vegetables && vegetables.length"
+        :vegetables="vegetables"
+        @emitAddtoCart="(item) => $emit('emitAddtoCart', item)"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import KeyWord from '@/components/KeyWord.vue';
-import Category from '@/components/Category.vue';
+import Spinner from '@/components/Spinner.vue';
 import FeatureProducts from '@/components/FeatureProducts.vue';
 import Banner from '@/components/Banner.vue';
 import FreshOrganic from '@/components/FreshOrganic.vue';
@@ -324,11 +123,49 @@ import FreshOrganic from '@/components/FreshOrganic.vue';
 export default {
   name: 'ShopDetail',
   components: {
-    KeyWord,
-    Category,
+    Spinner,
     FeatureProducts,
     Banner,
     FreshOrganic,
+  },
+  data() {
+    return {
+      product: {},
+      productId: '',
+      vegetables: [],
+      featureProducts: [],
+      isLoading: false,
+    };
+  },
+  methods: {
+    getProduct(id) {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
+      const vm = this;
+      vm.isLoading = true;
+      this.$http.get(api).then((response) => {
+        vm.product = response.data.product;
+        vm.isLoading = false;
+      });
+    },
+    getProducts() {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products`;
+      const vm = this;
+      vm.isLoading = true;
+      this.$http.get(api).then((response) => {
+        vm.featureProducts = response.data.products.filter((it) => it.is_enabled);
+        vm.vegetables = response.data.products.filter((it) => it.is_enabled && it.category === 'Vegetables');
+        vm.isLoading = false;
+      });
+    },
+    // 前往產品列表頁
+    gotoShop() {
+      this.$router.push('/page/shop');
+    },
+  },
+  created() {
+    this.productId = this.$route.params.productId;
+    this.getProduct(this.productId);
+    this.getProducts();
   },
 };
 </script>

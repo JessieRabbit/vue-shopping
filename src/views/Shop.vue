@@ -133,7 +133,10 @@
                   <div class="col-md-6 col-lg-6 col-xl-4"
                     v-for="item in filterProducts" :key="item.id">
                     <div class="rounded position-relative fruite-item">
-                      <div class="fruite-img">
+                      <div class="fruite-img"
+                        @click.prevent="goShopDetail(item.id)"
+                        @keyup.enter="goShopDetail(item.id)"
+                      >
                         <img
                           :src="item.imageUrl"
                           class="img-fluid w-100 rounded-top"
@@ -156,8 +159,10 @@
                             ${{ item.price }} / {{ item.unit }}
                           </p>
                           <a
-                            href="#"
-                            class="btn border border-secondary rounded-pill px-3 text-primary">
+                            href="javascript:void(0);"
+                            class="btn border border-secondary rounded-pill px-3 text-primary"
+                            @click.prevent="$emit('emitAddtoCart', item)"
+                          >
                             <i class="fa fa-shopping-bag me-2 text-primary"></i>
                             Add to cart
                           </a>
@@ -167,18 +172,18 @@
                   </div>
                   <div class="col-12">
                     <div class="pagination d-flex justify-content-center mt-5">
-                      <a href="#" class="rounded"
+                      <a href="javascript:void(0);" class="rounded"
                         :class="{'disabled': !pagination.has_pre}"
                         @click.prevent="getProducts(pagination.current_page - 1)">
                         &laquo;
                       </a>
-                      <a href="#" class="rounded"
+                      <a href="javascript:void(0);" class="rounded"
                         v-for="page in pagination.total_pages" :key="page"
                         :class="{'active': pagination.current_page === page}"
                         @click.prevent="getProducts(page)">
                         {{ page }}
                       </a>
-                      <a href="#" class="rounded"
+                      <a href="javascript:void(0);" class="rounded"
                         :class="{'disabled': !pagination.has_next}"
                         @click.prevent="getProducts(pagination.current_page + 1)">
                         &raquo;
@@ -297,6 +302,10 @@ export default {
       vm.hasCategory = false;
       vm.hasKeyword = true && vm.keywordTitle.length > 0;
       vm.hasRange = false;
+    },
+    // 前往產品詳細頁
+    goShopDetail(productId) {
+      this.$router.push(`/page/shop-detail/${productId}`);
     },
   },
   created() {

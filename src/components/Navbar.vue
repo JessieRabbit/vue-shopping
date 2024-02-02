@@ -1,26 +1,27 @@
 <template>
   <div>
+    <Alert/>
     <div class="container-fluid fixed-top" @scroll="handleScroll">
       <div class="container topbar bg-primary d-none d-lg-block">
         <div class="d-flex justify-content-between">
           <div class="top-info ps-2">
             <small class="me-3">
               <i class="fas fa-map-marker-alt me-2 text-secondary"></i>
-              <a href="#" class="text-white">123 Street, New York</a>
+              <a href="javascript:void(0);" class="text-white">123 Street, New York</a>
             </small>
             <small class="me-3">
               <i class="fas fa-envelope me-2 text-secondary"></i>
-              <a href="#" class="text-white">Email@Example.com</a>
+              <a href="javascript:void(0);" class="text-white">Email@Example.com</a>
             </small>
           </div>
           <div class="top-link pe-2">
-            <a href="#" class="text-white">
+            <a href="javascript:void(0);" class="text-white">
               <small class="text-white mx-2">Privacy Policy</small>/
             </a>
-            <a href="#" class="text-white">
+            <a href="javascript:void(0);" class="text-white">
               <small class="text-white mx-2">Terms of Use</small>/
             </a>
-            <a href="#" class="text-white">
+            <a href="javascript:void(0);" class="text-white">
               <small class="text-white ms-2">Sales and Refunds</small>
             </a>
           </div>
@@ -43,9 +44,6 @@
             <div class="navbar-nav mx-auto">
               <router-link class="nav-item nav-link" to="/">Home</router-link>
               <router-link class="nav-item nav-link" to="/page/shop">Shop</router-link>
-              <router-link class="nav-item nav-link" to="/page/shop-detail">
-                Shop Detail
-              </router-link>
               <div class="nav-item dropdown">
                 <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown" to="#">
                   Pages
@@ -70,12 +68,12 @@
               >
                 <i class="fas fa-search text-primary"></i>
               </button>
-              <a href="/page/cart" class="position-relative me-4 my-auto">
+              <a href="javascript:void(0);" class="position-relative me-4 my-auto">
                 <i class="fa fa-shopping-bag fa-2x"></i>
                 <span class="position-absolute bg-secondary
                   rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                   style="top: -5px; left: 15px; height: 20px; min-width: 20px">
-                  3
+                  {{ totalItems }}
                 </span>
               </a>
               <a href="/login" class="my-auto" aria-label="Auto">
@@ -91,9 +89,22 @@
 
 <script>
 import $ from 'jquery';
+import Alert from './AlertMessage.vue';
 
 export default {
   name: 'NavbarView',
+  components: {
+    Alert,
+  },
+  props: {
+    cartItems: Array,
+  },
+  computed: {
+    // 計算購物車產品數量
+    totalItems() {
+      return this.cartItems.reduce((accumulator, item) => accumulator + item.qty, 0);
+    },
+  },
   methods: {
     // nav scroll 參考網址
     // https://stackoverflow.com/questions/52534477/add-remove-class-on-scroll-in-vuejs

@@ -6,7 +6,7 @@
     <!-- Loading Spinner End -->
 
     <!-- Navbar start -->
-    <Navbar/>
+    <Navbar :cartItems="cartItems"/>
     <!-- Navbar End -->
 
     <!-- Hero Start -->
@@ -42,7 +42,7 @@
                     class="img-fluid w-100 h-100 bg-secondary rounded"
                     alt="First slide"
                   />
-                  <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
+                  <a href="javascript:void(0);" class="btn px-4 py-2 text-white rounded">Fruites</a>
                 </div>
                 <div class="carousel-item rounded">
                   <img
@@ -50,7 +50,8 @@
                     class="img-fluid w-100 h-100 rounded"
                     alt="Second slide"
                   />
-                  <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a>
+                  <a href="javascript:void(0);"
+                    class="btn px-4 py-2 text-white rounded">Vesitables</a>
                 </div>
               </div>
               <button
@@ -202,7 +203,10 @@
                     <div class="col-md-6 col-lg-4 col-xl-3"
                       v-for="item in filterProducts" :key="item.id">
                       <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
+                        <div class="fruite-img"
+                          @click.prevent="goShopDetail(item.id)"
+                          @keyup.enter="goShopDetail(item.id)"
+                        >
                           <img
                             :src="item.imageUrl"
                             class="img-fluid w-100 rounded-top"
@@ -225,8 +229,9 @@
                               ${{ item.price }} / {{ item.unit }}
                             </p>
                             <a
-                              href="#"
+                              href="javascript:void(0);"
                               class="btn border border-secondary rounded-pill px-3 text-primary"
+                              @click.prevent="addtoCart(item)"
                             >
                               <i class="fa fa-shopping-bag me-2 text-primary"></i>
                               Add to cart
@@ -250,7 +255,7 @@
       <div class="container py-5">
         <div class="row g-4 justify-content-center">
           <div class="col-md-6 col-lg-4">
-            <a href="#">
+            <a href="javascript:void(0);">
               <div class="service-item bg-secondary rounded border border-secondary">
                 <img src="@/assets/img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="" />
                 <div class="px-4 rounded-bottom">
@@ -263,7 +268,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
-            <a href="#">
+            <a href="javascript:void(0);">
               <div class="service-item bg-dark rounded border border-dark">
                 <img src="@/assets/img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="" />
                 <div class="px-4 rounded-bottom">
@@ -276,7 +281,7 @@
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
-            <a href="#">
+            <a href="javascript:void(0);">
               <div class="service-item bg-primary rounded border border-primary">
                 <img src="@/assets/img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="" />
                 <div class="px-4 rounded-bottom">
@@ -294,7 +299,10 @@
     <!-- Featurs End -->
 
     <!-- Vesitable Shop Start-->
-    <FreshOrganic v-if="vegetables && vegetables.length" :vegetables="vegetables"/>
+    <FreshOrganic v-if="vegetables && vegetables.length"
+      :vegetables="vegetables"
+      @emitAddtoCart="(item) => addtoCart(item)"
+    />
     <!-- Vesitable Shop End -->
 
     <!-- Banner Section Start-->
@@ -357,7 +365,7 @@
                    class="img-fluid rounded-circle w-100" alt="" />
                 </div>
                 <div class="col-6">
-                  <a href="#" class="h5">{{ item.title }}</a>
+                  <a href="javascript:void(0);" class="h5">{{ item.title }}</a>
                   <div class="d-flex my-3">
                     <i class="fas fa-star text-primary"></i>
                     <i class="fas fa-star text-primary"></i>
@@ -366,7 +374,10 @@
                     <i class="fas fa-star text-primary"></i>
                   </div>
                   <h4 class="mb-3">${{ item.price }}</h4>
-                  <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                  <a href="javascript:void(0);"
+                    class="btn border border-secondary rounded-pill px-3 text-primary"
+                    @click.prevent="addtoCart(item)"
+                  >
                     <i class="fa fa-shopping-bag me-2 text-primary"></i>
                     Add to cart
                   </a>
@@ -379,7 +390,7 @@
             <div class="text-center">
               <img :src="item.imageUrl" class="img-fluid rounded" alt="" />
               <div class="py-4">
-                <a href="#" class="h5">{{ item.title }}</a>
+                <a href="javascript:void(0);" class="h5">{{ item.title }}</a>
                 <div class="d-flex my-3 justify-content-center">
                   <i class="fas fa-star text-primary"></i>
                   <i class="fas fa-star text-primary"></i>
@@ -388,7 +399,10 @@
                   <i class="fas fa-star text-primary"></i>
                 </div>
                 <h4 class="mb-3">${{ item.price }}</h4>
-                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                <a href="javascript:void(0);"
+                  class="btn border border-secondary rounded-pill px-3 text-primary"
+                  @click.prevent="addtoCart(item)"
+                >
                   <i class="fa fa-shopping-bag me-2 text-primary"></i>
                   Add to cart
                 </a>
@@ -482,6 +496,7 @@ export default {
       vegetables: [],
       category: '',
       isLoading: false,
+      cartItems: [],
     };
   },
   computed: {
@@ -510,6 +525,34 @@ export default {
     onCategory(category) {
       const vm = this;
       vm.category = category;
+    },
+    // 前往產品詳細頁
+    goShopDetail(productId) {
+      this.$router.push(`/page/shop-detail/${productId}`);
+    },
+    // 加入購物車
+    addtoCart(itemToAdd) {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
+      const cart = {
+        product_id: itemToAdd.id,
+        qty: itemToAdd.qty || 1,
+      };
+      this.$http.post(api, { data: cart }).then((response) => {
+        if (response.data.success) {
+          this.$bus.$emit('message:push', response.data.message, 'success');
+          const itemInCart = this.cartItems.filter((item) => item.id === itemToAdd.id);
+          const isItemInCart = itemInCart.length > 0;
+          if (!isItemInCart) {
+            // https://contactmentor.com/add-property-to-object-javascript/
+            this.cartItems.push({ ...itemToAdd, qty: 1 });
+          } else {
+            if (itemToAdd.qty) {
+              itemInCart[0].qty += itemToAdd.qty;
+            }
+            itemInCart[0].qty += 1;
+          }
+        }
+      });
     },
   },
   created() {
