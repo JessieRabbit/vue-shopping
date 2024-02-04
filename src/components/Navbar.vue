@@ -68,7 +68,11 @@
               >
                 <i class="fas fa-search text-primary"></i>
               </button>
-              <a href="javascript:void(0);" class="position-relative me-4 my-auto">
+              <a href="javascript:void(0);" class="position-relative me-4 my-auto"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
+                @click.prevent="$emit('offcanvasShow')"
+              >
                 <i class="fa fa-shopping-bag fa-2x"></i>
                 <span class="position-absolute bg-secondary
                   rounded-circle d-flex align-items-center justify-content-center text-dark px-1"

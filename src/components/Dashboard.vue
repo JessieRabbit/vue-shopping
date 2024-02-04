@@ -1,11 +1,18 @@
 <template>
   <div>
-    <Navbar :cartItems="cartItems"/>
+    <Navbar :cartItems="cartItems" @offcanvasShow="getCarts"/>
     <Breadcrumb :currentPage="currentPage"/>
     <main>
       <router-view @emitAddtoCart="(item) => addtoCart(item)"></router-view>
     </main>
     <Footer/>
+    <!-- CartOffcanvas Start -->
+    <CartOffcanvas
+      :cart="cart"
+      :isCartLoading="isCartLoading"
+      @emitGetCarts="getCarts"
+    />
+    <!-- CartOffcanvas end -->
 
     <!-- Modal Search Start -->
     <SearchModal/>
@@ -18,6 +25,7 @@ import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 import Breadcrumb from './Breadcrumb.vue';
 import SearchModal from './SearchModal.vue';
+import CartOffcanvas from './CartOffcanvas.vue';
 
 export default {
   name: 'DashboardView',
@@ -26,10 +34,14 @@ export default {
     Footer,
     Breadcrumb,
     SearchModal,
+    CartOffcanvas,
   },
   data() {
     return {
       cartItems: [],
+      cart: {},
+      isCartLoading: false,
+      msg: '這是父層 Msg',
     };
   },
   computed: {
@@ -69,14 +81,27 @@ export default {
           const isItemInCart = itemInCart.length > 0;
           if (!isItemInCart) {
             // https://contactmentor.com/add-property-to-object-javascript/
-            this.cartItems.push({ ...itemToAdd, qty: 1 });
-          } else {
-            if (itemToAdd.qty) {
-              itemInCart[0].qty += itemToAdd.qty;
+            if (itemToAdd.qty > 1) {
+              this.cartItems.push({ ...itemToAdd, qty: itemToAdd.qty });
+            } else {
+              this.cartItems.push({ ...itemToAdd, qty: 1 });
             }
+          } else if (itemToAdd.qty > 1) {
+            itemInCart[0].qty += itemToAdd.qty;
+          } else {
             itemInCart[0].qty += 1;
           }
         }
+      });
+    },
+    // 取得購物車商品
+    getCarts() {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
+      const vm = this;
+      vm.isCartLoading = true;
+      this.$http.get(api).then((response) => {
+        vm.cart = response.data.data;
+        vm.isCartLoading = false;
       });
     },
   },

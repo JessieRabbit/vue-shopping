@@ -41,7 +41,10 @@
                 </p>
                 <div class="input-group quantity mb-5" style="width: 100px">
                   <div class="input-group-btn">
-                    <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                    <button class="btn btn-sm btn-minus rounded-circle bg-light border"
+                      @click.prevent="product.qty --"
+                      :disabled="product.qty === 1"
+                    >
                       <i class="fa fa-minus"></i>
                     </button>
                   </div>
@@ -49,9 +52,12 @@
                     type="text"
                     class="form-control form-control-sm text-center border-0"
                     value="1"
+                    v-model="product.qty"
                   />
                   <div class="input-group-btn">
-                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                    <button class="btn btn-sm btn-plus rounded-circle bg-light border"
+                      @click.prevent="product.qty ++"
+                    >
                       <i class="fa fa-plus"></i>
                     </button>
                   </div>
@@ -135,6 +141,7 @@ export default {
       vegetables: [],
       featureProducts: [],
       isLoading: false,
+      // counter: '1',
     };
   },
   methods: {
@@ -143,7 +150,7 @@ export default {
       const vm = this;
       vm.isLoading = true;
       this.$http.get(api).then((response) => {
-        vm.product = response.data.product;
+        vm.product = { ...response.data.product, qty: 1 };
         vm.isLoading = false;
       });
     },
