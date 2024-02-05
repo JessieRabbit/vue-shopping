@@ -1,6 +1,9 @@
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
   <div>
+    <!-- Loading Spinner Start -->
+    <Spinner :isLoading="isLoading"/>
+    <!-- Loading Spinner End -->
     <div class="container-fluid py-5">
       <div class="container py-5">
         <div class="table-responsive">
@@ -16,11 +19,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-for="item in cart.carts" :key="item.id" >
                 <th scope="row">
                   <div class="d-flex align-items-center">
                     <img
-                      src="@/assets/img/vegetable-item-3.png"
+                      :src="item.product.imageUrl"
                       class="img-fluid me-5 rounded-circle"
                       style="width: 80px; height: 80px"
                       alt=""
@@ -28,15 +31,21 @@
                   </div>
                 </th>
                 <td>
-                  <p class="mb-0 mt-4">Big Banana</p>
+                  <p class="mb-0 mt-4">{{ item.product.title }}</p>
+                  <div class="text-success" v-if="item.coupon">
+                    已套用優惠碼
+                  </div>
                 </td>
                 <td>
-                  <p class="mb-0 mt-4">2.99 $</p>
+                  <p class="mb-0 mt-4">{{ item.product.price | currency }}</p>
                 </td>
                 <td>
                   <div class="input-group quantity mt-4" style="width: 100px">
                     <div class="input-group-btn">
-                      <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                      <button class="btn btn-sm btn-minus rounded-circle bg-light border"
+                        @click.prevent="item.qty --"
+                        :disabled="item.qty === 1"
+                      >
                         <i class="fa fa-minus"></i>
                       </button>
                     </div>
@@ -44,109 +53,24 @@
                       type="text"
                       class="form-control form-control-sm text-center border-0"
                       value="1"
+                      v-model="item.qty"
                     />
                     <div class="input-group-btn">
-                      <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                      <button class="btn btn-sm btn-plus rounded-circle bg-light border"
+                        @click.prevent="item.qty ++"
+                      >
                         <i class="fa fa-plus"></i>
                       </button>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <p class="mb-0 mt-4">2.99 $</p>
+                  <p class="mb-0 mt-4">{{ item.qty * item.product.price | currency }}</p>
                 </td>
                 <td>
-                  <button class="btn btn-md rounded-circle bg-light border mt-4">
-                    <i class="fa fa-times text-danger"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="d-flex align-items-center">
-                    <img
-                      src="@/assets/img/vegetable-item-5.jpg"
-                      class="img-fluid me-5 rounded-circle"
-                      style="width: 80px; height: 80px"
-                      alt=""
-                    />
-                  </div>
-                </th>
-                <td>
-                  <p class="mb-0 mt-4">Potatoes</p>
-                </td>
-                <td>
-                  <p class="mb-0 mt-4">2.99 $</p>
-                </td>
-                <td>
-                  <div class="input-group quantity mt-4" style="width: 100px">
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                        <i class="fa fa-minus"></i>
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control form-control-sm text-center border-0"
-                      value="1"
-                    />
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                        <i class="fa fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="mb-0 mt-4">2.99 $</p>
-                </td>
-                <td>
-                  <button class="btn btn-md rounded-circle bg-light border mt-4">
-                    <i class="fa fa-times text-danger"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="d-flex align-items-center">
-                    <img
-                      src="@/assets/img/vegetable-item-2.jpg"
-                      class="img-fluid me-5 rounded-circle"
-                      style="width: 80px; height: 80px"
-                      alt=""
-                    />
-                  </div>
-                </th>
-                <td>
-                  <p class="mb-0 mt-4">Awesome Brocoli</p>
-                </td>
-                <td>
-                  <p class="mb-0 mt-4">2.99 $</p>
-                </td>
-                <td>
-                  <div class="input-group quantity mt-4" style="width: 100px">
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                        <i class="fa fa-minus"></i>
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control form-control-sm text-center border-0"
-                      value="1"
-                    />
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                        <i class="fa fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="mb-0 mt-4">2.99 $</p>
-                </td>
-                <td>
-                  <button class="btn btn-md rounded-circle bg-light border mt-4">
+                  <button class="btn btn-md rounded-circle bg-light border mt-4"
+                    @click="removeCartItem(item.id)"
+                  >
                     <i class="fa fa-times text-danger"></i>
                   </button>
                 </td>
@@ -159,8 +83,12 @@
             type="text"
             class="border-0 border-bottom rounded me-5 py-3 mb-4"
             placeholder="Coupon Code"
+            v-model="coupon_code"
           />
-          <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">
+          <button class="btn border-secondary rounded-pill px-4 py-3 text-primary"
+            type="button"
+            @click="addCuponCode"
+          >
             Apply Coupon
           </button>
         </div>
@@ -172,19 +100,23 @@
                 <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
                 <div class="d-flex justify-content-between mb-4">
                   <h5 class="mb-0 me-4">Subtotal:</h5>
-                  <p class="mb-0">$96.00</p>
+                  <p class="mb-0">{{ total | currency }}</p>
                 </div>
-                <div class="d-flex justify-content-between">
-                  <h5 class="mb-0 me-4">Shipping</h5>
-                  <div class="">
-                    <p class="mb-0">Flat rate: $3.00</p>
+                <template v-if="cart.final_total !== cart.total">
+                  <div class="d-flex justify-content-between">
+                    <h5 class="mb-0 me-4">Shipping</h5>
+                    <div class="">
+                      <p class="mb-0">Flat rate: {{ cart.total / cart.final_total / 100 }}%</p>
+                    </div>
                   </div>
-                </div>
-                <p class="mb-0 text-end">Shipping to Ukraine.</p>
+                  <p class="mb-0 text-end">Shipping to Ukraine.</p>
+                </template>
               </div>
               <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                 <h5 class="mb-0 ps-4 me-4">Total</h5>
-                <p class="mb-0 pe-4">$99.00</p>
+                <p class="mb-0 pe-4">
+                  {{ Math.floor(total * (1- cart.final_total / cart.total / 100)) }}
+                </p>
               </div>
               <button
                 class="btn border-secondary rounded-pill px-4 py-3
@@ -202,7 +134,72 @@
 </template>
 
 <script>
+import Spinner from '@/components/Spinner.vue';
+
 export default {
   name: 'CartPage',
+  components: {
+    Spinner,
+  },
+  data() {
+    return {
+      cart: {},
+      coupon_code: '',
+      isLoading: false,
+    };
+  },
+  computed: {
+    // 計算總價
+    total() {
+      let total = 0;
+      const vm = this;
+      if (!vm.cart.carts) {
+        return 0;
+      }
+      vm.cart.carts.forEach((item) => {
+        total += (parseFloat(item.product.price) * item.qty);
+      });
+      return total;
+    },
+  },
+  methods: {
+    // 取得購物車商品
+    getCarts() {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
+      const vm = this;
+      vm.isLoading = true;
+      this.$http.get(api).then((response) => {
+        vm.cart = response.data.data;
+        vm.isLoading = false;
+      });
+    },
+    removeCartItem(id) {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${id}`;
+      const vm = this;
+      vm.isLoading = true;
+      this.$http.delete(api).then(() => {
+        vm.getCarts();
+        vm.isLoading = false;
+      });
+    },
+    addCuponCode() {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/coupon`;
+      const vm = this;
+      const coupon = {
+        code: vm.coupon_code,
+      };
+      vm.isLoading = true;
+      this.$http.post(api, { data: coupon }).then((response) => {
+        if (!response.data.success) {
+          this.$bus.$emit('message:push', response.data.message, 'danger');
+        }
+        vm.getCarts();
+        vm.isLoading = false;
+      });
+    },
+  },
+  created() {
+    this.getCarts();
+  },
 };
 </script>

@@ -226,7 +226,7 @@
                           </p>
                           <div class="d-flex justify-content-between flex-lg-wrap">
                             <p class="text-dark fs-5 fw-bold mb-0">
-                              ${{ item.price }} / {{ item.unit }}
+                              {{ item.price | currency }} / {{ item.unit }}
                             </p>
                             <a
                               href="javascript:void(0);"
@@ -335,7 +335,7 @@
               >
                 <h1 style="font-size: 100px">1</h1>
                 <div class="d-flex flex-column">
-                  <span class="h2 mb-0">${{ products[products.length-1].price }}</span>
+                  <span class="h2 mb-0">{{ products[products.length-1].price | currency }}</span>
                   <span class="h4 text-muted mb-0">{{ products[products.length-1].unit }}</span>
                 </div>
               </div>
@@ -373,7 +373,7 @@
                     <i class="fas fa-star text-primary"></i>
                     <i class="fas fa-star text-primary"></i>
                   </div>
-                  <h4 class="mb-3">${{ item.price }}</h4>
+                  <h4 class="mb-3">{{ item.price | currency }}</h4>
                   <a href="javascript:void(0);"
                     class="btn border border-secondary rounded-pill px-3 text-primary"
                     @click.prevent="addtoCart(item)"
@@ -398,7 +398,7 @@
                   <i class="fas fa-star text-primary"></i>
                   <i class="fas fa-star text-primary"></i>
                 </div>
-                <h4 class="mb-3">${{ item.price }}</h4>
+                <h4 class="mb-3">{{ item.price | currency }}</h4>
                 <a href="javascript:void(0);"
                   class="btn border border-secondary rounded-pill px-3 text-primary"
                   @click.prevent="addtoCart(item)"

@@ -16,8 +16,10 @@
           <i class="fa fa-star text-secondary"></i>
         </div>
         <div class="d-flex mb-2">
-          <h5 class="fw-bold me-2">${{ item.price }}</h5>
-          <h5 class="text-danger text-decoration-line-through">${{ item.origin_price }}</h5>
+          <h5 class="fw-bold me-2">{{ item.price | currency }}</h5>
+          <h5 class="text-danger text-decoration-line-through">
+            {{ item.origin_price | currency }}
+          </h5>
         </div>
       </div>
     </div>

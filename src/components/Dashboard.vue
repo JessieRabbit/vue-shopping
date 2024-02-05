@@ -41,7 +41,6 @@ export default {
       cartItems: [],
       cart: {},
       isCartLoading: false,
-      msg: '這是父層 Msg',
     };
   },
   computed: {

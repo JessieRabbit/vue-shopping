@@ -39,6 +39,7 @@
                     <input
                       type="text"
                       class="form-control form-control-sm text-center border-0"
+                      value="1"
                       v-model="item.qty"
                     />
                     <div class="input-group-btn">
@@ -49,7 +50,7 @@
                       </button>
                     </div>
                   </div>
-                  <div>{{ item.qty * item.product.price }}</div>
+                  <div>{{ item.qty * item.product.price | currency }}</div>
                 </div>
                 <button type="button" class="btn btn-outline-danger btn-sm"
                   style="width: 40px; height: 40px"
@@ -77,18 +78,9 @@
 <script>
 export default {
   name: 'CartOffcanvas',
-  model: {
-    prop: 'childMsg',
-  },
   props: {
     cart: Object,
     isCartLoading: Boolean,
-    // value: String,
-    // childMsg: String,
-  },
-  data() {
-    return {
-    };
   },
   methods: {
     removeCartItem(id) {

@@ -22,7 +22,9 @@
                 {{ item.description}}
               </p>
               <div class="d-flex justify-content-between flex-lg-wrap">
-                <p class="text-dark fs-5 fw-bold mb-0">${{ item.price }} / {{ item.unit }}</p>
+                <p class="text-dark fs-5 fw-bold mb-0">
+                  {{ item.price | currency }} / {{ item.unit }}
+                </p>
                 <a href="javascript:void(0);"
                   class="btn border border-secondary rounded-pill px-3 text-primary"
                   @click.prevent="$emit('emitAddtoCart', item)"
