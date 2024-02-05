@@ -60,6 +60,12 @@ export default {
           return 'Testimonial';
         case 'Contact':
           return 'Contact';
+        case 'Pay':
+          return 'Pay';
+        case 'Orders':
+          return 'Orders';
+        case 'OrderDetail':
+          return 'OrderDetail';
         default:
           return '404 Error';
       }

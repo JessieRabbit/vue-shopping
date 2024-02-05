@@ -10,6 +10,9 @@ import Checkout from '@/views/Checkout.vue';
 import Testimonial from '@/views/Testimonial.vue';
 import ErrorPage from '@/views/ErrorPage.vue';
 import Contact from '@/views/Contact.vue';
+import Pay from '@/views/Pay.vue';
+import Orders from '@/views/Orders.vue';
+import OrderDetail from '@/views/OrderDetail.vue';
 
 Vue.use(VueRouter);
 
@@ -63,6 +66,21 @@ const routes = [
         path: 'contact',
         name: 'Contact',
         component: Contact,
+      },
+      {
+        path: 'pay/:orderId',
+        name: 'Pay',
+        component: Pay,
+      },
+      {
+        path: 'orders',
+        name: 'Orders',
+        component: Orders,
+      },
+      {
+        path: 'order-detail/:orderId',
+        name: 'OrderDetail',
+        component: OrderDetail,
       },
     ],
   },

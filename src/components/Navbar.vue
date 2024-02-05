@@ -57,6 +57,7 @@
                   <router-link class="dropdown-item" to="*">404 Page</router-link>
                 </div>
               </div>
+              <router-link class="nav-item nav-link" to="/page/orders">Orders</router-link>
               <router-link class="nav-item nav-link" to="/page/contact">Contact</router-link>
             </div>
             <div class="d-flex m-3 me-0">

@@ -7,9 +7,18 @@
     <!-- Loading Spinner End -->
     <div class="container-fluid py-5">
       <div class="container py-5">
+        <a
+          href="javascript:void(0)"
+          class="btn border border-secondary
+          px-4 py-3 rounded-pill text-primary mb-2"
+          @click.prevent="gotoCart"
+        >
+          <i class="bi bi-arrow-left"></i>
+          上一頁
+        </a>
         <h1 class="mb-4">Billing details</h1>
         <validation-observer class="col-md-6" v-slot="{ invalid }">
-          <form @submit.prevent="crateOrder">
+          <form @submit.prevent="createOrder">
             <div class="row g-5">
               <div class="col-md-12 col-lg-6 col-xl-7">
                 <validation-provider rules="required" v-slot="{ errors, classes }">
@@ -257,7 +266,7 @@
                 </div>
                 <div class="row g-4 text-center align-items-center justify-content-center pt-4">
                   <button
-                    type="button"
+                    type="submit"
                     class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary"
                     :disabled="invalid"
                   >
@@ -312,7 +321,7 @@ export default {
     },
   },
   methods: {
-    crateOrder() {
+    createOrder() {
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order`;
       const vm = this;
       const order = vm.form;
@@ -337,6 +346,10 @@ export default {
     checkShipping() {
       const vm = this;
       return vm.total < 149 ? 60 : 0;
+    },
+    // 前往購物車頁
+    gotoCart() {
+      this.$router.push('/page/cart');
     },
   },
   created() {

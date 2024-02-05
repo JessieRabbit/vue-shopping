@@ -171,24 +171,7 @@
                     </div>
                   </div>
                   <div class="col-12">
-                    <div class="pagination d-flex justify-content-center mt-5">
-                      <a href="javascript:void(0);" class="rounded"
-                        :class="{'disabled': !pagination.has_pre}"
-                        @click.prevent="getProducts(pagination.current_page - 1)">
-                        &laquo;
-                      </a>
-                      <a href="javascript:void(0);" class="rounded"
-                        v-for="page in pagination.total_pages" :key="page"
-                        :class="{'active': pagination.current_page === page}"
-                        @click.prevent="getProducts(page)">
-                        {{ page }}
-                      </a>
-                      <a href="javascript:void(0);" class="rounded"
-                        :class="{'disabled': !pagination.has_next}"
-                        @click.prevent="getProducts(pagination.current_page + 1)">
-                        &raquo;
-                      </a>
-                    </div>
+                    <Pagination :pagination="pagination" @pageEvent="(page) => getProducts(page)"/>
                   </div>
                 </div>
               </div>
@@ -206,6 +189,7 @@ import KeyWord from '@/components/KeyWord.vue';
 import Category from '@/components/Category.vue';
 import FeatureProducts from '@/components/FeatureProducts.vue';
 import Banner from '@/components/Banner.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default {
   name: 'ShopPage',
@@ -215,6 +199,7 @@ export default {
     Category,
     FeatureProducts,
     Banner,
+    Pagination,
   },
   data() {
     return {
