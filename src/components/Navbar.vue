@@ -50,7 +50,7 @@
                 </router-link>
                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                   <router-link class="dropdown-item" to="/page/cart">Cart</router-link>
-                  <router-link class="dropdown-item" to="/page/chackout">Chackout</router-link>
+                  <router-link class="dropdown-item" to="/page/checkout">Chackout</router-link>
                   <router-link class="dropdown-item" to="/page/testimonial">
                     Testimonial
                   </router-link>

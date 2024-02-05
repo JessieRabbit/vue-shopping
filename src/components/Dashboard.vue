@@ -54,8 +54,8 @@ export default {
           return 'Shop Detail';
         case 'Cart':
           return 'Cart';
-        case 'Chackout':
-          return 'Chackout';
+        case 'Checkout':
+          return 'Checkout';
         case 'Testimonial':
           return 'Testimonial';
         case 'Contact':

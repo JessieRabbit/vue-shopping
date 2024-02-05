@@ -122,6 +122,7 @@
                 class="btn border-secondary rounded-pill px-4 py-3
                 text-primary text-uppercase mb-4 ms-4"
                 type="button"
+                @click.prevent="gotoCheckout"
               >
                 Proceed Checkout
               </button>
@@ -196,6 +197,10 @@ export default {
         vm.getCarts();
         vm.isLoading = false;
       });
+    },
+    // 前往購物車確認頁
+    gotoCheckout() {
+      this.$router.push('/page/checkout/');
     },
   },
   created() {

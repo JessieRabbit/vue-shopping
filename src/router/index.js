@@ -6,7 +6,7 @@ import Home from '@/views/Home.vue';
 import Shop from '@/views/Shop.vue';
 import ShopDetail from '@/views/ShopDetail.vue';
 import Cart from '@/views/Cart.vue';
-import Chackout from '@/views/Chackout.vue';
+import Checkout from '@/views/Checkout.vue';
 import Testimonial from '@/views/Testimonial.vue';
 import ErrorPage from '@/views/ErrorPage.vue';
 import Contact from '@/views/Contact.vue';
@@ -50,9 +50,9 @@ const routes = [
         component: Cart,
       },
       {
-        path: 'chackout',
-        name: 'Chackout',
-        component: Chackout,
+        path: 'checkout',
+        name: 'Checkout',
+        component: Checkout,
       },
       {
         path: 'testimonial',
