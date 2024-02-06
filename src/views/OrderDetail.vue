@@ -4,11 +4,11 @@
     <!-- Loading Spinner Start -->
     <Spinner :isLoading="isLoading"/>
     <!-- Loading Spinner End -->
-    <div class="container py-5">
+    <div class="container py-5 px-5 bg-table">
       <a
         href="javascript:void(0)"
         class="btn border border-secondary
-        px-4 py-3 rounded-pill text-primary mb-2"
+        px-4 py-3 rounded-pill text-primary mb-4"
         @click.prevent="gotoOrders"
       >
         <i class="bi bi-arrow-left"></i>
@@ -20,13 +20,13 @@
           購物明細
         </h3>
         <table class="table border mb-5">
-          <thead>
+          <thead class="table-bg bg-secondary">
             <tr>
-              <th scope="col"></th>
-              <th scope="col">Name</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Price</th>
-              <th scope="col">小計</th>
+              <th scope="col" class="text-white"></th>
+              <th scope="col" class="text-white">Name</th>
+              <th scope="col" class="text-white">Quantity</th>
+              <th scope="col" class="text-white">Price</th>
+              <th scope="col" class="text-white">小計</th>
             </tr>
           </thead>
           <tbody>
@@ -34,7 +34,7 @@
               <td>
                 <img
                   :src="item.product.imageUrl"
-                  class="img-fluid me-5 rounded-circle"
+                  class="img-fluid rounded-circle"
                   style="width: 80px; height: 80px"
                   alt=""
                 />
@@ -55,8 +55,8 @@
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="4" class="text-end">總計</td>
-              <td>{{ order.total * 100 | currency }}</td>
+              <td colspan="4" class="text-end text-danger">總計</td>
+              <td class="text-danger totalAlign">{{ order.total * 100 | currency }}</td>
             </tr>
           </tfoot>
         </table>

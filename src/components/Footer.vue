@@ -30,21 +30,17 @@
             </div>
             <div class="col-lg-3">
               <div class="d-flex justify-content-end pt-3">
-                <a class="btn btn-outline-secondary me-2
-                btn-md-square rounded-circle" href="#" aria-label="Twitter">
+                <a target="_blank" class="btn btn-outline-secondary me-2
+                btn-md-square rounded-circle" href="https://twitter.com/?lang=zh-Hant" aria-label="Twitter">
                   <i class="fab fa-twitter"></i>
                 </a>
-                <a class="btn btn-outline-secondary
-                me-2 btn-md-square rounded-circle" href="#" aria-label="Facebook">
+                <a target="_blank" class="btn btn-outline-secondary
+                me-2 btn-md-square rounded-circle" href="https://facebook.com/" aria-label="Facebook">
                   <i class="fab fa-facebook-f"></i>
                 </a>
-                <a class="btn btn-outline-secondary me-2
-                btn-md-square rounded-circle" href="#" aria-label="Youtube">
+                <a target="_blank" class="btn btn-outline-secondary me-2
+                btn-md-square rounded-circle" href="https://youtube.com/" aria-label="Youtube">
                   <i class="fab fa-youtube"></i>
-                </a>
-                <a class="btn btn-outline-secondary btn-md-square rounded-circle" href="#"
-                aria-label="Linkedin">
-                  <i class="fab fa-linkedin-in"></i>
                 </a>
               </div>
             </div>
@@ -54,7 +50,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="footer-item">
               <h4 class="text-light mb-3">Why People Like us!</h4>
-              <p class="mb-4">
+              <p class="mb-4 text-truncate">
                 Jessie 蔬果行有別於一般菜商，有著集產地、批發商、菜商的角色，
                 是少數能夠直接供應給各大蔬果行的業者，
                 Jessie 蔬果源自台北社子島發跡、產地自產自銷。
@@ -66,7 +62,7 @@
                 改至目前南部產地專人種植、專人採買、產銷一條龍，
                 時至今日也有著 4、50 年累積的經驗。
               </p>
-              <a href="/page/contact"
+              <a href="/page/about"
                 class="btn border-secondary py-2 px-4 rounded-pill text-primary">
                 Read More
               </a>
@@ -75,30 +71,24 @@
           <div class="col-lg-3 col-md-6">
             <div class="d-flex flex-column text-start footer-item">
               <h4 class="text-light mb-3">Shop Info</h4>
-              <a class="btn-link" href="">About Us</a>
-              <a class="btn-link" href="">Contact Us</a>
-              <a class="btn-link" href="">Privacy Policy</a>
-              <a class="btn-link" href="">Terms & Condition</a>
-              <a class="btn-link" href="">Return Policy</a>
-              <a class="btn-link" href="">FAQs & Help</a>
+              <a class="btn-link" href="/page/about">About Us</a>
+              <a class="btn-link" href="/page/contact">Contact Us</a>
+              <a class="btn-link" href="/page/privacyPolicy">Privacy Policy</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="d-flex flex-column text-start footer-item">
               <h4 class="text-light mb-3">Account</h4>
               <a class="btn-link" href="">My Account</a>
-              <a class="btn-link" href="">Shop details</a>
-              <a class="btn-link" href="">Shopping Cart</a>
-              <a class="btn-link" href="">Wishlist</a>
-              <a class="btn-link" href="">Order History</a>
-              <a class="btn-link" href="">International Orders</a>
+              <a class="btn-link" href="/page/orders">Order details</a>
+              <a class="btn-link" href="/page/shop">Shopping</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="footer-item">
               <h4 class="text-light mb-3">Contact</h4>
-              <p>Address: 1429 Netus Rd, NY 48247</p>
-              <p>Email: Example@gmail.com</p>
+              <p>Address: 台北市汀州路一路240號</p>
+              <p>Email: shenFamily@gmail.com</p>
               <p>Phone: +0123 4567 8910</p>
               <p>Payment Accepted</p>
               <img src="@/assets/img/payment.png" class="img-fluid" alt="" />

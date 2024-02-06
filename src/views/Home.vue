@@ -38,7 +38,7 @@
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active rounded">
                   <img
-                    src="@/assets/img/hero-img-1.png"
+                    src="https://images.unsplash.com/photo-1681840531300-55f69047ccfb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx2aXN1YWwtc2VhcmNofDI2fHx8ZW58MHx8fHx8"
                     class="img-fluid w-100 h-100 bg-secondary rounded"
                     alt="First slide"
                   />
@@ -46,7 +46,7 @@
                 </div>
                 <div class="carousel-item rounded">
                   <img
-                    src="@/assets/img/hero-img-2.jpg"
+                    src="https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dmVnZXRhYmxlc3xlbnwwfDB8MHx8fDI%3D"
                     class="img-fluid w-100 h-100 rounded"
                     alt="Second slide"
                   />
@@ -90,7 +90,7 @@
               </div>
               <div class="featurs-content text-center">
                 <h5>Free Shipping</h5>
-                <p class="mb-0">Free on order over $300</p>
+                <p class="mb-0">Free on order over $149</p>
               </div>
             </div>
           </div>
@@ -257,7 +257,7 @@
           <div class="col-md-6 col-lg-4">
             <a href="javascript:void(0);">
               <div class="service-item bg-secondary rounded border border-secondary">
-                <img src="@/assets/img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="" />
+                <img src="https://unsplash.com/photos/1OhHaIGGq4Y/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8ODV8fHxlbnwwfHx8fDE3MDcyMTEyMzB8&force=true&w=640" class="img-fluid rounded-top w-100" alt="" />
                 <div class="px-4 rounded-bottom">
                   <div class="service-content bg-primary text-center p-4 rounded">
                     <h5 class="text-white">Fresh Apples</h5>
@@ -270,7 +270,7 @@
           <div class="col-md-6 col-lg-4">
             <a href="javascript:void(0);">
               <div class="service-item bg-dark rounded border border-dark">
-                <img src="@/assets/img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="" />
+                <img src="https://unsplash.com/photos/gLjy-OzY8j4/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8NTc0fHx8ZW58MHx8fHwxNzA3MjEzMjQ4fA&force=true&w=640" class="img-fluid rounded-top w-100" alt="" />
                 <div class="px-4 rounded-bottom">
                   <div class="service-content bg-light text-center p-4 rounded">
                     <h5 class="text-primary">Tasty Fruits</h5>
@@ -283,7 +283,7 @@
           <div class="col-md-6 col-lg-4">
             <a href="javascript:void(0);">
               <div class="service-item bg-primary rounded border border-primary">
-                <img src="@/assets/img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="" />
+                <img src="https://unsplash.com/photos/4fTaeH37eH0/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8ODR8fHxlbnwwfHx8fDE3MDcyMTI1MTl8&force=true&w=640" class="img-fluid rounded-top w-100" alt="" />
                 <div class="px-4 rounded-bottom">
                   <div class="service-content bg-secondary text-center p-4 rounded">
                     <h5 class="text-white">Exotic Vegitable</h5>
@@ -315,13 +315,15 @@
               <h1 class="display-3 text-white">Fresh Exotic Fruits</h1>
               <p class="fw-normal display-3 text-dark mb-4">in Our Store</p>
               <p class="mb-4 text-dark">
-                新鮮好吃的水果
+                {{ products[products.length-1].description }}
               </p>
               <a
-                href="#"
+                href="javascript:void(0);"
                 class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5"
-                >BUY</a
+                @click.prevent="addtoCart(products[products.length-1])"
               >
+                BUY
+              </a>
             </div>
           </div>
           <div class="col-lg-6">

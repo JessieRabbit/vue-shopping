@@ -7,13 +7,13 @@
     <div class="container py-5">
       <div class="table-responsive">
         <table class="table table-striped table-hover">
-          <thead>
+          <thead class="table-bg bg-secondary">
             <tr>
-              <th scope="col">購買時間</th>
-              <th scope="col">Email</th>
-              <th scope="col">購買款項</th>
-              <th scope="col">應付金額</th>
-              <th scope="col">是否付款</th>
+              <th scope="col" class="text-white">購買時間</th>
+              <th scope="col" class="text-white">Email</th>
+              <th scope="col" class="text-white">購買款項</th>
+              <th scope="col" class="text-white">應付金額</th>
+              <th scope="col" class="text-white">是否付款</th>
             </tr>
           </thead>
           <tbody>

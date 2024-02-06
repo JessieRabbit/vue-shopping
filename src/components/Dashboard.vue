@@ -66,6 +66,10 @@ export default {
           return 'Orders';
         case 'OrderDetail':
           return 'OrderDetail';
+        case 'About':
+          return 'About';
+        case 'PrivacyPolicy':
+          return 'PrivacyPolicy';
         default:
           return '404 Error';
       }

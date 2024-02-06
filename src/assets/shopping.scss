@@ -515,3 +515,27 @@
 .table tr.pointer {
   cursor: pointer;
 }
+
+.table thead.table-bg {
+  --bs-table-bg: none;
+}
+
+.table th {
+  padding-left: 30px;
+}
+
+.table tbody td {
+  border: none;
+  padding: 30px;
+  background: #fff;
+  border-bottom: 4px solid #f8f9fd;
+  vertical-align: middle;
+}
+
+.bg-table {
+  background: #f8f9fd;
+}
+
+.totalAlign {
+  padding-left: 30px !important;
+}

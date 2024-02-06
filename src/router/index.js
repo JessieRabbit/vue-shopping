@@ -13,6 +13,8 @@ import Contact from '@/views/Contact.vue';
 import Pay from '@/views/Pay.vue';
 import Orders from '@/views/Orders.vue';
 import OrderDetail from '@/views/OrderDetail.vue';
+import About from '@/views/About.vue';
+import PrivacyPolicy from '@/views/PrivacyPolicy.vue';
 
 Vue.use(VueRouter);
 
@@ -81,6 +83,16 @@ const routes = [
         path: 'order-detail/:orderId',
         name: 'OrderDetail',
         component: OrderDetail,
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: About,
+      },
+      {
+        path: 'privacyPolicy',
+        name: 'PrivacyPolicy',
+        component: PrivacyPolicy,
       },
     ],
   },
