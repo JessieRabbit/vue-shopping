@@ -3,7 +3,7 @@
     <div class="alert alert-dismissible show fade"
       :class="'alert-' + item.status"
       v-for="(item, i) in messages" :key="i">
-        商品成功{{ item.message }}
+        商品{{ item.message }}
       <button type="button" class="btn-close" data-bs-dismiss="alert"
         aria-label="Close" @click="removeMessage(i)">
       </button>

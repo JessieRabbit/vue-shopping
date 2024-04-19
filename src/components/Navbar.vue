@@ -42,23 +42,25 @@
           </button>
           <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
             <div class="navbar-nav mx-auto">
-              <router-link class="nav-item nav-link" to="/">Home</router-link>
-              <router-link class="nav-item nav-link" to="/page/shop">Shop</router-link>
-              <div class="nav-item dropdown">
+              <router-link class="nav-item nav-link" to="/home">Home</router-link>
+              <router-link class="nav-item nav-link" to="/shop">Shop</router-link>
+              <router-link class="nav-item nav-link" to="/orders">Orders</router-link>
+              <router-link class="nav-item nav-link" to="/testimonial">Testimonial</router-link>
+              <router-link class="nav-item nav-link" to="/contact">Contact</router-link>
+              <!-- 保留 -->
+              <!-- <div class="nav-item dropdown">
                 <router-link class="nav-link dropdown-toggle" data-bs-toggle="dropdown" to="#">
                   Pages
                 </router-link>
                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                  <router-link class="dropdown-item" to="/page/cart">Cart</router-link>
-                  <router-link class="dropdown-item" to="/page/checkout">Chackout</router-link>
-                  <router-link class="dropdown-item" to="/page/testimonial">
+                  <router-link class="dropdown-item" to="/cart">Cart</router-link>
+                  <router-link class="dropdown-item" to="/checkout">Chackout</router-link>
+                  <router-link class="dropdown-item" to="/testimonial">
                     Testimonial
                   </router-link>
                   <router-link class="dropdown-item" to="*">404 Page</router-link>
                 </div>
-              </div>
-              <router-link class="nav-item nav-link" to="/page/orders">Orders</router-link>
-              <router-link class="nav-item nav-link" to="/page/contact">Contact</router-link>
+              </div> -->
             </div>
             <div class="d-flex m-3 me-0">
               <button
@@ -103,12 +105,7 @@ export default {
   },
   props: {
     cartItems: Array,
-  },
-  computed: {
-    // 計算購物車產品數量
-    totalItems() {
-      return this.cartItems.reduce((accumulator, item) => accumulator + item.qty, 0);
-    },
+    totalItems: Number,
   },
   methods: {
     // nav scroll 參考網址

@@ -327,7 +327,7 @@ export default {
       const order = vm.form;
       this.$http.post(api, { data: order }).then((response) => {
         if (response.data.success) {
-          vm.$router.push(`/page/pay/${response.data.orderId}`);
+          vm.$router.push(`/pay/${response.data.orderId}`);
         } else {
           this.$bus.$emit('message:push', response.data.message, 'danger');
         }
@@ -349,7 +349,7 @@ export default {
     },
     // 前往購物車頁
     gotoCart() {
-      this.$router.push('/page/cart');
+      this.$router.push('/cart');
     },
   },
   created() {

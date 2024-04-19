@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Navbar :cartItems="cartItems" @offcanvasShow="getCarts"/>
-    <Breadcrumb :currentPage="currentPage"/>
+    <Navbar :cartItems="cartItems" @offcanvasShow="getCarts" :totalItems="totalItems"/>
+    <Breadcrumb :currentPage="currentPage" v-if="currentPage !=='Home'"/>
     <main>
       <router-view @emitAddtoCart="(item) => addtoCart(item)"></router-view>
     </main>
@@ -10,9 +10,15 @@
     <CartOffcanvas
       :cart="cart"
       :isCartLoading="isCartLoading"
-      @emitGetCarts="getCarts"
+      @emitRemoveCart="(id) => removeToCart(id)"
+      @emitAddtoCart="(item) => addtoCart(item)"
+      @emitPlusAndminustoCart = "(item, action) => plusAndminusItem(item, action)"
     />
     <!-- CartOffcanvas end -->
+
+    <!-- Back to Top Start -->
+    <BackToTop/>
+    <!-- Back to Top end -->
 
     <!-- Modal Search Start -->
     <SearchModal/>
@@ -25,6 +31,7 @@ import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 import Breadcrumb from './Breadcrumb.vue';
 import SearchModal from './SearchModal.vue';
+import BackToTop from './BackToTop.vue';
 import CartOffcanvas from './CartOffcanvas.vue';
 
 export default {
@@ -34,13 +41,15 @@ export default {
     Footer,
     Breadcrumb,
     SearchModal,
+    BackToTop,
     CartOffcanvas,
   },
   data() {
     return {
       cartItems: [],
-      cart: {},
+      cart: [],
       isCartLoading: false,
+      totalItems: 0,
     };
   },
   computed: {
@@ -48,6 +57,8 @@ export default {
     currentPage() {
       const vm = this;
       switch (vm.$route.name) {
+        case 'Home':
+          return 'Home';
         case 'Shop':
           return 'Shop';
         case 'ShopDetail':
@@ -76,43 +87,83 @@ export default {
     },
   },
   methods: {
+    // 取得購物車商品
+    getCarts() {
+      const vm = this;
+      vm.cart = JSON.parse(localStorage.getItem('cart'));
+    },
+    // 計算購物車產品總數量
+    getTotalItems() {
+      const vm = this;
+      vm.cart = JSON.parse(localStorage.getItem('cart'));
+      if (vm.cart && vm.cart.length > 0) {
+        vm.totalItems = vm.cart.reduce((accumulator, item) => accumulator + item.qty, 0);
+      } else {
+        vm.totalItems = 0;
+      }
+    },
+    saveCart() {
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+      this.getTotalItems();
+    },
     // 加入購物車
     addtoCart(itemToAdd) {
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-      const cart = {
-        product_id: itemToAdd.id,
-        qty: itemToAdd.qty || 1,
-      };
-      this.$http.post(api, { data: cart }).then((response) => {
-        if (response.data.success) {
-          this.$bus.$emit('message:push', response.data.message, 'success');
-          const itemInCart = this.cartItems.filter((item) => item.id === itemToAdd.id);
-          const isItemInCart = itemInCart.length > 0;
-          if (!isItemInCart) {
-            // https://contactmentor.com/add-property-to-object-javascript/
-            if (itemToAdd.qty > 1) {
-              this.cartItems.push({ ...itemToAdd, qty: itemToAdd.qty });
+      const vm = this;
+      this.getCarts();
+      this.$bus.$emit('message:push', '加入購物車成功', 'success');
+      let itemInCart = [];
+      if (vm.cart) {
+        itemInCart = vm.cart.filter((item) => item.id === itemToAdd.id);
+      }
+      const isItemInCart = itemInCart.length > 0;
+      if (!isItemInCart) {
+        this.cartItems.push({ ...itemToAdd, qty: 1 });
+      } else {
+        Object.keys(this.cartItems).forEach((item) => {
+          if (this.cartItems[item].id === itemToAdd.id) {
+            if (itemToAdd.qty) {
+              this.cartItems[item].qty += itemToAdd.qty;
             } else {
-              this.cartItems.push({ ...itemToAdd, qty: 1 });
+              this.cartItems[item].qty += 1;
             }
-          } else if (itemToAdd.qty > 1) {
-            itemInCart[0].qty += itemToAdd.qty;
+          }
+        });
+      }
+
+      this.saveCart();
+    },
+    removeToCart(id) {
+      if (this.cartItems.length === 0) {
+        this.cartItems = JSON.parse(localStorage.getItem('cart'));
+      }
+
+      this.cartItems.forEach((item, i) => {
+        if (item.id === id) {
+          this.cartItems.splice(i, 1);
+        }
+      });
+
+      this.saveCart();
+      this.getCarts();
+    },
+    plusAndminusItem(item, action) {
+      const vm = this;
+      vm.cartItems = JSON.parse(localStorage.getItem('cart'));
+      Object.keys(vm.cartItems).forEach((i) => {
+        if (vm.cartItems[i].id === item.id) {
+          if (action === 'plus') {
+            vm.cartItems[i].qty += 1;
           } else {
-            itemInCart[0].qty += 1;
+            vm.cartItems[i].qty -= 1;
           }
         }
       });
+
+      this.saveCart();
     },
-    // 取得購物車商品
-    getCarts() {
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-      const vm = this;
-      vm.isCartLoading = true;
-      this.$http.get(api).then((response) => {
-        vm.cart = response.data.data;
-        vm.isCartLoading = false;
-      });
-    },
+  },
+  created() {
+    this.getTotalItems();
   },
 };
 </script>

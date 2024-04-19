@@ -31,14 +31,15 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/page',
     name: 'Dashboard',
     component: Dashboard,
+    redirect: 'home',
     children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: Home,
+      },
       {
         path: 'shop',
         name: 'Shop',
@@ -100,7 +101,7 @@ const routes = [
 
 const router = new VueRouter({
   // remove hashbang #! from url 參考 https://stackoverflow.com/questions/34623833/vue-js-how-to-remove-hashbang-from-url
-  mode: 'history',
+  // mode: 'history',
   routes,
 });
 

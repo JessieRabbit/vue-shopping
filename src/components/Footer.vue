@@ -62,7 +62,7 @@
                 改至目前南部產地專人種植、專人採買、產銷一條龍，
                 時至今日也有著 4、50 年累積的經驗。
               </p>
-              <a href="/page/about"
+              <a href="/about"
                 class="btn border-secondary py-2 px-4 rounded-pill text-primary">
                 Read More
               </a>
@@ -71,17 +71,17 @@
           <div class="col-lg-3 col-md-6">
             <div class="d-flex flex-column text-start footer-item">
               <h4 class="text-light mb-3">Shop Info</h4>
-              <a class="btn-link" href="/page/about">About Us</a>
-              <a class="btn-link" href="/page/contact">Contact Us</a>
-              <a class="btn-link" href="/page/privacyPolicy">Privacy Policy</a>
+              <a class="btn-link" href="/about">About Us</a>
+              <a class="btn-link" href="/contact">Contact Us</a>
+              <a class="btn-link" href="/privacyPolicy">Privacy Policy</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="d-flex flex-column text-start footer-item">
               <h4 class="text-light mb-3">Account</h4>
               <a class="btn-link" href="">My Account</a>
-              <a class="btn-link" href="/page/orders">Order details</a>
-              <a class="btn-link" href="/page/shop">Shopping</a>
+              <a class="btn-link" href="/orders">Order details</a>
+              <a class="btn-link" href="/shop">Shopping</a>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">

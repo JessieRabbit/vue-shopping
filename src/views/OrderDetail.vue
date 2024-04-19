@@ -125,7 +125,7 @@ export default {
       });
     },
     gotoOrders() {
-      this.$router.push('/page/orders');
+      this.$router.push('/orders');
     },
   },
   created() {

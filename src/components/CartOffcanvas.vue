@@ -19,18 +19,19 @@
         <template v-if="!isCartLoading">
           <ul class="list-unstyled">
             <li class="rounded border border-secondary-subtle border-3 mb-2 py-3"
-              v-for="item in cart.carts" :key="item.id" >
+              v-for="(item, i) in cart" :key="`canvas${i}`" >
               <div class="d-flex justify-content-around">
                 <div class="rounded me-4" style="width: 100px; height: 100px">
-                  <img :src="item.product.imageUrl" class="img-fluid rounded" alt="" />
+                  <img :src="item.imageUrl" class="img-fluid rounded" alt="" />
                 </div>
                 <div>
-                  {{ item.product.title }}
-                  <p>1 {{ item.product.unit }}</p>
+                  {{ item.title }}
+                  <p>1 {{ item.unit }}</p>
                   <div class="input-group quantity mb-5" style="width: 100px">
                     <div class="input-group-btn">
                       <button class="btn btn-sm btn-minus rounded-circle bg-light border"
-                        @click.prevent="item.qty --"
+                        @click.prevent="[$emit('emitPlusAndminustoCart', item, 'minus'),
+                          item.qty --]"
                         :disabled="item.qty === 1"
                       >
                         <i class="fa fa-minus"></i>
@@ -44,13 +45,14 @@
                     />
                     <div class="input-group-btn">
                       <button class="btn btn-sm btn-plus rounded-circle bg-light border"
-                        @click.prevent="item.qty ++"
+                        @click.prevent="[$emit('emitPlusAndminustoCart', item, 'plus'),
+                          item.qty ++]"
                       >
                         <i class="fa fa-plus"></i>
                       </button>
                     </div>
                   </div>
-                  <div>{{ item.qty * item.product.price | currency }}</div>
+                  <div>{{ item.qty * item.price | currency }}</div>
                 </div>
                 <button type="button" class="btn btn-outline-danger btn-sm"
                   style="width: 40px; height: 40px"
@@ -79,19 +81,16 @@
 export default {
   name: 'CartOffcanvas',
   props: {
-    cart: Object,
+    cart: Array,
     isCartLoading: Boolean,
   },
   methods: {
     removeCartItem(id) {
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${id}`;
-      this.$http.delete(api).then(() => {
-        this.$emit('emitGetCarts');
-      });
+      this.$emit('emitRemoveCart', id);
     },
     // 前往結帳頁面
     gotoCart() {
-      this.$router.push('/page/cart');
+      this.$router.push('/cart');
     },
   },
 };

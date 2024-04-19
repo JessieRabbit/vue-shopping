@@ -200,7 +200,7 @@ export default {
     },
     // 前往購物車確認頁
     gotoCheckout() {
-      this.$router.push('/page/checkout/');
+      this.$router.push('/checkout/');
     },
   },
   created() {

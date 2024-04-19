@@ -79,7 +79,7 @@ export default {
     },
     // 前往訂單詳細頁
     gotoOrderDetail(orderId) {
-      this.$router.push(`/page/order-detail/${orderId}`);
+      this.$router.push(`/order-detail/${orderId}`);
     },
   },
   created() {

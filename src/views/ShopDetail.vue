@@ -166,7 +166,7 @@ export default {
     },
     // 前往產品列表頁
     gotoShop() {
-      this.$router.push('/page/shop');
+      this.$router.push('/shop');
     },
   },
   created() {

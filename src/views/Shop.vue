@@ -290,7 +290,7 @@ export default {
     },
     // 前往產品詳細頁
     goShopDetail(productId) {
-      this.$router.push(`/page/shop-detail/${productId}`);
+      this.$router.push(`/shop-detail/${productId}`);
     },
   },
   created() {

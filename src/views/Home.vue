@@ -5,10 +5,6 @@
     <Spinner :isLoading="isLoading"/>
     <!-- Loading Spinner End -->
 
-    <!-- Navbar start -->
-    <Navbar :cartItems="cartItems"/>
-    <!-- Navbar End -->
-
     <!-- Hero Start -->
     <div class="container-fluid py-5 mb-5 hero-header">
       <div class="container py-5">
@@ -231,7 +227,7 @@
                             <a
                               href="javascript:void(0);"
                               class="btn border border-secondary rounded-pill px-3 text-primary"
-                              @click.prevent="addtoCart(item)"
+                              @click.prevent="$emit('emitAddtoCart', item)"
                             >
                               <i class="fa fa-shopping-bag me-2 text-primary"></i>
                               Add to cart
@@ -320,7 +316,7 @@
               <a
                 href="javascript:void(0);"
                 class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5"
-                @click.prevent="addtoCart(products[products.length-1])"
+                @click.prevent="$emit('emitAddtoCart', products[products.length-1])"
               >
                 BUY
               </a>
@@ -378,7 +374,7 @@
                   <h4 class="mb-3">{{ item.price | currency }}</h4>
                   <a href="javascript:void(0);"
                     class="btn border border-secondary rounded-pill px-3 text-primary"
-                    @click.prevent="addtoCart(item)"
+                    @click.prevent="$emit('emitAddtoCart', item)"
                   >
                     <i class="fa fa-shopping-bag me-2 text-primary"></i>
                     Add to cart
@@ -403,7 +399,7 @@
                 <h4 class="mb-3">{{ item.price | currency }}</h4>
                 <a href="javascript:void(0);"
                   class="btn border border-secondary rounded-pill px-3 text-primary"
-                  @click.prevent="addtoCart(item)"
+                  @click.prevent="$emit('emitAddtoCart', item)"
                 >
                   <i class="fa fa-shopping-bag me-2 text-primary"></i>
                   Add to cart
@@ -458,39 +454,20 @@
     <!-- Tastimonial Start -->
     <OurTastimonial/>
     <!-- Tastimonial End -->
-
-    <!-- Footer Start -->
-    <Footer/>
-    <!-- Footer End -->
-
-    <!-- Back to Top -->
-    <BackToTop/>
-
-    <!-- Modal Search Start -->
-    <SearchModal/>
-    <!-- Modal Search End -->
   </div>
 </template>
 
 <script>
 import Spinner from '@/components/Spinner.vue';
-import Navbar from '@/components/Navbar.vue';
 import FreshOrganic from '@/components/FreshOrganic.vue';
 import OurTastimonial from '@/components/OurTastimonial.vue';
-import Footer from '@/components/Footer.vue';
-import BackToTop from '@/components/BackToTop.vue';
-import SearchModal from '@/components/SearchModal.vue';
 
 export default {
   name: 'HomePage',
   components: {
     Spinner,
-    Navbar,
     FreshOrganic,
     OurTastimonial,
-    Footer,
-    BackToTop,
-    SearchModal,
   },
   data() {
     return {
@@ -530,32 +507,32 @@ export default {
     },
     // 前往產品詳細頁
     goShopDetail(productId) {
-      this.$router.push(`/page/shop-detail/${productId}`);
+      this.$router.push(`/shop-detail/${productId}`);
     },
     // 加入購物車
-    addtoCart(itemToAdd) {
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-      const cart = {
-        product_id: itemToAdd.id,
-        qty: itemToAdd.qty || 1,
-      };
-      this.$http.post(api, { data: cart }).then((response) => {
-        if (response.data.success) {
-          this.$bus.$emit('message:push', response.data.message, 'success');
-          const itemInCart = this.cartItems.filter((item) => item.id === itemToAdd.id);
-          const isItemInCart = itemInCart.length > 0;
-          if (!isItemInCart) {
-            // https://contactmentor.com/add-property-to-object-javascript/
-            this.cartItems.push({ ...itemToAdd, qty: 1 });
-          } else {
-            if (itemToAdd.qty) {
-              itemInCart[0].qty += itemToAdd.qty;
-            }
-            itemInCart[0].qty += 1;
-          }
-        }
-      });
-    },
+    // addtoCart(itemToAdd) {
+    // const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
+    // const cart = {
+    //   product_id: itemToAdd.id,
+    //   qty: itemToAdd.qty || 1,
+    // };
+    // this.$http.post(api, { data: cart }).then((response) => {
+    //   if (response.data.success) {
+    //     this.$bus.$emit('message:push', response.data.message, 'success');
+    //     const itemInCart = this.cartItems.filter((item) => item.id === itemToAdd.id);
+    //     const isItemInCart = itemInCart.length > 0;
+    //     if (!isItemInCart) {
+    //       // https://contactmentor.com/add-property-to-object-javascript/
+    //       this.cartItems.push({ ...itemToAdd, qty: 1 });
+    //     } else {
+    //       if (itemToAdd.qty) {
+    //         itemInCart[0].qty += itemToAdd.qty;
+    //       }
+    //       itemInCart[0].qty += 1;
+    //     }
+    //   }
+    // });
+  // },
   },
   created() {
     this.getProducts();
