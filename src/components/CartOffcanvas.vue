@@ -30,7 +30,7 @@
                   <div class="input-group quantity mb-5" style="width: 100px">
                     <div class="input-group-btn">
                       <button class="btn btn-sm btn-minus rounded-circle bg-light border"
-                        @click.prevent="[$emit('emitPlusAndminustoCart', item, 'minus'),
+                        @click.prevent="[$emit('emitPlusAndMinustoCart', item, 'minus'),
                           item.qty --]"
                         :disabled="item.qty === 1"
                       >
@@ -45,7 +45,7 @@
                     />
                     <div class="input-group-btn">
                       <button class="btn btn-sm btn-plus rounded-circle bg-light border"
-                        @click.prevent="[$emit('emitPlusAndminustoCart', item, 'plus'),
+                        @click.prevent="[$emit('emitPlusAndMinustoCart', item, 'plus'),
                           item.qty ++]"
                       >
                         <i class="fa fa-plus"></i>

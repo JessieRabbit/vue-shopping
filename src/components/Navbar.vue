@@ -29,9 +29,11 @@
       </div>
       <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-          <a href="/" class="navbar-brand">
-            <h1 class="text-primary display-6">Fruitables</h1>
-          </a>
+          <router-link to="/home">
+            <a href="javascript:void(0);">
+              <h1 class="text-primary display-6">Fruitables</h1>
+            </a>
+          </router-link>
           <button
             class="navbar-toggler py-2 px-3"
             type="button"

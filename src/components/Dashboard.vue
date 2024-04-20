@@ -3,7 +3,10 @@
     <Navbar :cartItems="cartItems" @offcanvasShow="getCarts" :totalItems="totalItems"/>
     <Breadcrumb :currentPage="currentPage" v-if="currentPage !=='Home'"/>
     <main>
-      <router-view @emitAddtoCart="(item) => addtoCart(item)"></router-view>
+      <router-view
+        @emitAddtoCart="(item, origin) => addtoCart(item, origin)"
+        @emitPlusAndMinustoCart = "(item, action) => plusAndminusItem(item, action)"
+      />
     </main>
     <Footer/>
     <!-- CartOffcanvas Start -->
@@ -11,8 +14,7 @@
       :cart="cart"
       :isCartLoading="isCartLoading"
       @emitRemoveCart="(id) => removeToCart(id)"
-      @emitAddtoCart="(item) => addtoCart(item)"
-      @emitPlusAndminustoCart = "(item, action) => plusAndminusItem(item, action)"
+      @emitPlusAndMinustoCart = "(item, action) => plusAndminusItem(item, action)"
     />
     <!-- CartOffcanvas end -->
 
@@ -102,12 +104,13 @@ export default {
         vm.totalItems = 0;
       }
     },
+    // 存到 localStorage
     saveCart() {
       localStorage.setItem('cart', JSON.stringify(this.cartItems));
       this.getTotalItems();
     },
-    // 加入購物車
-    addtoCart(itemToAdd) {
+    // 加入購物車 for 單一按鈕
+    addtoCart(itemToAdd, origin = 'default') {
       const vm = this;
       this.getCarts();
       this.$bus.$emit('message:push', '加入購物車成功', 'success');
@@ -117,12 +120,25 @@ export default {
       }
       const isItemInCart = itemInCart.length > 0;
       if (!isItemInCart) {
-        this.cartItems.push({ ...itemToAdd, qty: 1 });
+        if (!itemToAdd.qty) {
+          this.cartItems.push({ ...itemToAdd, qty: 1 });
+        } else {
+          this.cartItems.push({ ...itemToAdd, qty: itemToAdd.qty });
+        }
       } else {
+        // 當重整按下按鈕重取 localStorage
+        if (!this.cartItems.length) {
+          this.cartItems = JSON.parse(localStorage.getItem('cart'));
+        }
+
         Object.keys(this.cartItems).forEach((item) => {
           if (this.cartItems[item].id === itemToAdd.id) {
             if (itemToAdd.qty) {
-              this.cartItems[item].qty += itemToAdd.qty;
+              if (origin === 'detailShop') {
+                this.cartItems[item].qty = itemToAdd.qty;
+              } else {
+                this.cartItems[item].qty += itemToAdd.qty;
+              }
             } else {
               this.cartItems[item].qty += 1;
             }
@@ -132,6 +148,7 @@ export default {
 
       this.saveCart();
     },
+    // 刪除購物車項目
     removeToCart(id) {
       if (this.cartItems.length === 0) {
         this.cartItems = JSON.parse(localStorage.getItem('cart'));
@@ -146,6 +163,7 @@ export default {
       this.saveCart();
       this.getCarts();
     },
+    // 增加和減少購物車 for 加減按鈕
     plusAndminusItem(item, action) {
       const vm = this;
       vm.cartItems = JSON.parse(localStorage.getItem('cart'));

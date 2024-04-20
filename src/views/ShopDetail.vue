@@ -64,7 +64,7 @@
                 </div>
                 <a href="javascript:void(0);"
                   class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
-                  @click.prevent="$emit('emitAddtoCart', product)"
+                  @click.prevent="$emit('emitAddtoCart', product, 'detailShop')"
                 >
                   <i class="fa fa-shopping-bag me-2 text-primary"></i>
                   Add to cart
@@ -141,7 +141,6 @@ export default {
       vegetables: [],
       featureProducts: [],
       isLoading: false,
-      // counter: '1',
     };
   },
   methods: {
