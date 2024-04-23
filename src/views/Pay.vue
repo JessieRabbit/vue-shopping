@@ -31,7 +31,7 @@
             <tfoot>
               <tr>
                 <td colspan="2" class="text-end">總計</td>
-                <td>{{ order.total * 100 | currency }}</td>
+                <td>{{ order.total | currency }}</td>
               </tr>
             </tfoot>
           </table>
@@ -57,7 +57,7 @@
               <tr>
                 <th scope="col">付款狀態</th>
                 <td>
-                  <span v-if="!order.is_paid">尚未付款</span>
+                  <span v-if="!order.is_paid" class="text-danger">尚未付款</span>
                   <span v-else class="text-success fw-bolder">付款完成</span>
                 </td>
               </tr>

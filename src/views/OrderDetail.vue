@@ -22,14 +22,14 @@
         <table class="table border mb-5">
           <thead class="table-bg bg-secondary">
             <tr>
-              <th scope="col" class="text-white"></th>
-              <th scope="col" class="text-white">Name</th>
-              <th scope="col" class="text-white">Quantity</th>
-              <th scope="col" class="text-white">Price</th>
-              <th scope="col" class="text-white">小計</th>
+              <th scope="col" class="text-white detail"></th>
+              <th scope="col" class="text-white detail">Name</th>
+              <th scope="col" class="text-white detail">Quantity</th>
+              <th scope="col" class="text-white detail">Price</th>
+              <th scope="col" class="text-white detail">小計</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="orders">
             <tr v-for="item in order.products" :key="item.id">
               <td>
                 <img
@@ -56,7 +56,7 @@
           <tfoot>
             <tr>
               <td colspan="4" class="text-end text-danger">總計</td>
-              <td class="text-danger totalAlign">{{ order.total * 100 | currency }}</td>
+              <td class="text-danger totalAlign">{{ order.total | currency }}</td>
             </tr>
           </tfoot>
         </table>

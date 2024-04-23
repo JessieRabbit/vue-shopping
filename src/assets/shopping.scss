@@ -74,6 +74,10 @@
   color: var(--bs-white) !important;
 }
 
+.btn:disabled {
+  background: var(--bs-gray) !important;
+}
+
 /*** Topbar Start ***/
 .fixed-top {
   transition: 0.5s;
@@ -520,11 +524,11 @@
   --bs-table-bg: none;
 }
 
-.table th {
+.table th.detail {
   padding-left: 30px;
 }
 
-.table tbody td {
+.table tbody.orders td {
   border: none;
   padding: 30px;
   background: #fff;

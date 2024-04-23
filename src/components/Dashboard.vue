@@ -1,18 +1,18 @@
 <template>
   <div>
-    <Navbar :cartItems="cartItems" @offcanvasShow="getCarts" :totalItems="totalItems"/>
+    <Navbar @offcanvasShow="getCarts" :totalItems="totalItems" :currentPage="currentPage"/>
     <Breadcrumb :currentPage="currentPage" v-if="currentPage !=='Home'"/>
     <main>
       <router-view
         @emitAddtoCart="(item, origin) => addtoCart(item, origin)"
         @emitPlusAndMinustoCart = "(item, action) => plusAndminusItem(item, action)"
+        @emitRemoveCart="(id) => removeToCart(id)"
       />
     </main>
     <Footer/>
     <!-- CartOffcanvas Start -->
     <CartOffcanvas
       :cart="cart"
-      :isCartLoading="isCartLoading"
       @emitRemoveCart="(id) => removeToCart(id)"
       @emitPlusAndMinustoCart = "(item, action) => plusAndminusItem(item, action)"
     />
@@ -50,7 +50,6 @@ export default {
     return {
       cartItems: [],
       cart: [],
-      isCartLoading: false,
       totalItems: 0,
     };
   },

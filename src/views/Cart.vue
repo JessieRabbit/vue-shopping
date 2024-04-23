@@ -19,11 +19,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in cart.carts" :key="item.id" >
+              <tr v-for="item in cart" :key="item.id" >
                 <th scope="row">
                   <div class="d-flex align-items-center">
                     <img
-                      :src="item.product.imageUrl"
+                      :src="item.imageUrl"
                       class="img-fluid me-5 rounded-circle"
                       style="width: 80px; height: 80px"
                       alt=""
@@ -31,19 +31,20 @@
                   </div>
                 </th>
                 <td>
-                  <p class="mb-0 mt-4">{{ item.product.title }}</p>
+                  <p class="mb-0 mt-4">{{ item.title }}</p>
                   <div class="text-success" v-if="item.coupon">
                     已套用優惠碼
                   </div>
                 </td>
                 <td>
-                  <p class="mb-0 mt-4">{{ item.product.price | currency }}</p>
+                  <p class="mb-0 mt-4">{{ item.price | currency }}</p>
                 </td>
                 <td>
                   <div class="input-group quantity mt-4" style="width: 100px">
                     <div class="input-group-btn">
                       <button class="btn btn-sm btn-minus rounded-circle bg-light border"
-                        @click.prevent="item.qty --"
+                        @click.prevent="[$emit('emitPlusAndMinustoCart', item, 'minus'),
+                          item.qty --]"
                         :disabled="item.qty === 1"
                       >
                         <i class="fa fa-minus"></i>
@@ -57,7 +58,8 @@
                     />
                     <div class="input-group-btn">
                       <button class="btn btn-sm btn-plus rounded-circle bg-light border"
-                        @click.prevent="item.qty ++"
+                        @click.prevent="[$emit('emitPlusAndMinustoCart', item, 'plus'),
+                          item.qty ++]"
                       >
                         <i class="fa fa-plus"></i>
                       </button>
@@ -65,7 +67,7 @@
                   </div>
                 </td>
                 <td>
-                  <p class="mb-0 mt-4">{{ item.qty * item.product.price | currency }}</p>
+                  <p class="mb-0 mt-4">{{ item.qty * item.price | currency }}</p>
                 </td>
                 <td>
                   <button class="btn btn-md rounded-circle bg-light border mt-4"
@@ -78,20 +80,6 @@
             </tbody>
           </table>
         </div>
-        <div class="mt-5">
-          <input
-            type="text"
-            class="border-0 border-bottom rounded me-5 py-3 mb-4"
-            placeholder="Coupon Code"
-            v-model="coupon_code"
-          />
-          <button class="btn border-secondary rounded-pill px-4 py-3 text-primary"
-            type="button"
-            @click="addCuponCode"
-          >
-            Apply Coupon
-          </button>
-        </div>
         <div class="row g-4 justify-content-end">
           <div class="col-8"></div>
           <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
@@ -99,23 +87,15 @@
               <div class="p-4">
                 <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
                 <div class="d-flex justify-content-between mb-4">
-                  <h5 class="mb-0 me-4">Subtotal:</h5>
+                  <h5 class="mb-0 me-4">Total:</h5>
                   <p class="mb-0">{{ total | currency }}</p>
                 </div>
-                <template v-if="cart.final_total !== cart.total">
-                  <div class="d-flex justify-content-between">
-                    <h5 class="mb-0 me-4">Shipping</h5>
-                    <div class="">
-                      <p class="mb-0">Flat rate: {{ cart.total / cart.final_total / 100 }}%</p>
-                    </div>
-                  </div>
-                  <p class="mb-0 text-end">Shipping to Ukraine.</p>
-                </template>
               </div>
-              <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                <h5 class="mb-0 ps-4 me-4">Total</h5>
+              <div v-if="cart.final_total !== cart.total"
+                class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                <h5 class="mb-0 ps-4 me-4">Discount</h5>
                 <p class="mb-0 pe-4">
-                  {{ Math.floor(total * (1- cart.final_total / cart.total / 100)) }}
+                  {{ cart.final_total | currency }}
                 </p>
               </div>
               <button
@@ -145,7 +125,6 @@ export default {
   data() {
     return {
       cart: {},
-      coupon_code: '',
       isLoading: false,
     };
   },
@@ -154,11 +133,11 @@ export default {
     total() {
       let total = 0;
       const vm = this;
-      if (!vm.cart.carts) {
+      if (!vm.cart) {
         return 0;
       }
-      vm.cart.carts.forEach((item) => {
-        total += (parseFloat(item.product.price) * item.qty);
+      vm.cart.forEach((item) => {
+        total += (parseFloat(item.price) * item.qty);
       });
       return total;
     },
@@ -166,40 +145,30 @@ export default {
   methods: {
     // 取得購物車商品
     getCarts() {
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
       const vm = this;
-      vm.isLoading = true;
-      this.$http.get(api).then((response) => {
-        vm.cart = response.data.data;
-        vm.isLoading = false;
-      });
+      vm.cart = JSON.parse(localStorage.getItem('cart'));
     },
     removeCartItem(id) {
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${id}`;
       const vm = this;
-      vm.isLoading = true;
-      this.$http.delete(api).then(() => {
-        vm.getCarts();
-        vm.isLoading = false;
-      });
-    },
-    addCuponCode() {
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/coupon`;
-      const vm = this;
-      const coupon = {
-        code: vm.coupon_code,
-      };
-      vm.isLoading = true;
-      this.$http.post(api, { data: coupon }).then((response) => {
-        if (!response.data.success) {
-          this.$bus.$emit('message:push', response.data.message, 'danger');
+      vm.cart.forEach((item, i) => {
+        if (item.id === id) {
+          vm.cart.splice(i, 1);
         }
-        vm.getCarts();
-        vm.isLoading = false;
       });
+      this.$emit('emitRemoveCart', id);
     },
     // 前往購物車確認頁
     gotoCheckout() {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
+
+      this.cart.forEach((it) => {
+        const cart = {
+          product_id: it.id,
+          qty: it.qty,
+        };
+        this.$http.post(api, { data: cart });
+      });
+
       this.$router.push('/checkout/');
     },
   },

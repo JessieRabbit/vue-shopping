@@ -9,14 +9,7 @@
           data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <!-- loading start -->
-        <div class="d-flex justify-content-center align-items-center fs-2"
-          style="height: 200px;"
-          v-if="isCartLoading">
-          <i class="fas fa-spinner fa-spin"></i>
-        </div>
-        <!-- loading end -->
-        <template v-if="!isCartLoading">
+        <template v-if="cart && cart.length > 0">
           <ul class="list-unstyled">
             <li class="rounded border border-secondary-subtle border-3 mb-2 py-3"
               v-for="(item, i) in cart" :key="`canvas${i}`" >
@@ -72,17 +65,24 @@
             前往結帳
           </button>
         </template>
+        <template v-else>
+          <div class="d-flex justify-content-center align-items-center fs-1">
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+          <div class="text-center mt-2">購物車內無任何商品!</div>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { Offcanvas } from 'bootstrap';
+
 export default {
   name: 'CartOffcanvas',
   props: {
     cart: Array,
-    isCartLoading: Boolean,
   },
   methods: {
     removeCartItem(id) {
@@ -91,6 +91,9 @@ export default {
     // 前往結帳頁面
     gotoCart() {
       this.$router.push('/cart');
+      const offcanvasElementById = document.getElementById('offcanvasRight');
+      const offcanvas = Offcanvas.getOrCreateInstance(offcanvasElementById);
+      offcanvas.hide();
     },
   },
 };

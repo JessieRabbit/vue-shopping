@@ -77,6 +77,7 @@
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                 aria-controls="offcanvasRight"
                 @click.prevent="$emit('offcanvasShow')"
+                v-if="isCartIcon"
               >
                 <i class="fa fa-shopping-bag fa-2x"></i>
                 <span class="position-absolute bg-secondary
@@ -106,8 +107,19 @@ export default {
     Alert,
   },
   props: {
-    cartItems: Array,
     totalItems: Number,
+    currentPage: String,
+  },
+  computed: {
+    // 是否顯示購物車 icon
+    isCartIcon() {
+      const vm = this;
+      if (vm.currentPage === 'Cart' || vm.currentPage === 'Checkout'
+        || vm.currentPage === 'Pay' || vm.currentPage === 'Orders') {
+        return false;
+      }
+      return true;
+    },
   },
   methods: {
     // nav scroll 參考網址

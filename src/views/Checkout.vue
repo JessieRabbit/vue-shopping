@@ -7,15 +7,6 @@
     <!-- Loading Spinner End -->
     <div class="container-fluid py-5">
       <div class="container py-5">
-        <a
-          href="javascript:void(0)"
-          class="btn border border-secondary
-          px-4 py-3 rounded-pill text-primary mb-2"
-          @click.prevent="gotoCart"
-        >
-          <i class="bi bi-arrow-left"></i>
-          上一頁
-        </a>
         <h1 class="mb-4">Billing details</h1>
         <validation-observer class="col-md-6" v-slot="{ invalid }">
           <form @submit.prevent="createOrder">
@@ -124,66 +115,31 @@
                             />
                           </div>
                         </th>
-                        <td class="py-5">{{ item.product.title }}</td>
+                        <td class="py-5">
+                          {{ item.product.title }}
+                          <div class="text-success" v-if="item.coupon">
+                            已套用優惠券
+                          </div>
+                        </td>
                         <td class="py-5">{{ item.product.price | currency }}</td>
                         <td class="py-5">{{ item.qty }}</td>
                         <td class="py-5">{{ item.qty * item.product.price | currency }}</td>
                       </tr>
                       <tr>
                         <th scope="row"></th>
-                        <td class="py-5"></td>
-                        <td class="py-5"></td>
-                        <td class="py-5">
-                          <p class="mb-0 text-dark py-3">Subtotal</p>
-                        </td>
-                        <td class="py-5">
-                          <div class="py-3 border-bottom border-top">
-                            <p class="mb-0 text-dark">{{ total | currency }}</p>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row"></th>
-                        <td class="py-5">
-                          <p class="mb-0 text-dark py-4">Shipping</p>
-                        </td>
-                        <td colspan="3" class="py-5">
-                          <div class="form-check text-start">
-                            <label class="form-check-label" for="Shipping-2">
-                              Flat rate: {{ cart.total / cart.final_total / 100 }}%
-                            </label>
-                          </div>
-                          <div class="form-check text-start">
-                            <input
-                              type="radio"
-                              class="form-check-input bg-primary border-0"
-                              id="Shipping-1"
-                              name="Shipping"
-                              :value="checkShipping()"
-                              v-model="discount"
-                            />
-                            <label class="form-check-label text-danger" for="Shipping-1"
-                              v-if="total >= 149"
-                            >
-                              滿 $149，Free Shipping
-                            </label>
-                            <label class="form-check-label" for="Shipping-1" v-else>
-                              尚未滿 $149，需額外支付 $60 Shipping
-                            </label>
-                          </div>
-                          <div class="form-check text-start">
-                            <input
-                              type="radio"
-                              class="form-check-input bg-primary border-0"
-                              id="Shipping-2"
-                              name="Shipping"
-                              value="8"
-                              v-model="discount"
-                            />
-                            <label class="form-check-label" for="Shipping-2">
-                              Local Pickup: $8.00
-                            </label>
-                          </div>
+                        <td class="py-5" colspan="4">
+                          <input
+                            type="text"
+                            class="border-0 border-bottom rounded me-2 py-3"
+                            placeholder="Coupon Code"
+                            v-model="coupon_code"
+                          />
+                          <button class="btn border-secondary rounded-pill px-4 py-3 text-primary"
+                            type="button"
+                            @click="addCuponCode"
+                          >
+                            Apply Coupon
+                          </button>
                         </td>
                       </tr>
                       <tr>
@@ -196,10 +152,22 @@
                         <td class="py-5">
                           <div class="py-3 border-bottom border-top">
                             <p class="mb-0 text-dark">
-                              {{
-                                parseFloat(discount) +
-                                Math.floor(total * (1- cart.final_total / cart.total / 100))
-                              }}
+                              {{ cart.total | currency }}
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr v-if="cart.final_total !== cart.total">
+                        <th scope="row"></th>
+                        <td class="py-5">
+                          <p class="mb-0 text-success text-uppercase py-3">Discount</p>
+                        </td>
+                        <td class="py-5"></td>
+                        <td class="py-5"></td>
+                        <td class="py-5">
+                          <div class="py-3 border-bottom border-top">
+                            <p class="mb-0 text-success">
+                              {{ cart.final_total | currency }}
                             </p>
                           </div>
                         </td>
@@ -207,7 +175,8 @@
                     </tbody>
                   </table>
                 </div>
-                <div
+                <!-- 保留 -->
+                <!-- <div
                   class="row g-4 text-center align-items-center
                   justify-content-center border-bottom py-3"
                 >
@@ -228,7 +197,7 @@
                       cleared in our account.
                     </p>
                   </div>
-                </div>
+                </div> -->
                 <!-- 保留 -->
                 <!-- <div
                   class="row g-4 text-center align-items-center
@@ -247,7 +216,8 @@
                     </div>
                   </div>
                 </div> -->
-                <div
+                <!-- 保留 -->
+                <!-- <div
                   class="row g-4 text-center align-items-center
                   justify-content-center border-bottom py-3"
                 >
@@ -263,7 +233,7 @@
                       <label class="form-check-label" for="Transfer-2">Cash On Delivery</label>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="row g-4 text-center align-items-center justify-content-center pt-4">
                   <button
                     type="submit"
@@ -304,6 +274,7 @@ export default {
       isLoading: false,
       cart: {},
       discount: 0,
+      coupon_code: '',
     };
   },
   computed: {
@@ -350,6 +321,22 @@ export default {
     // 前往購物車頁
     gotoCart() {
       this.$router.push('/cart');
+    },
+    // 增加優惠碼
+    addCuponCode() {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/coupon`;
+      const vm = this;
+      const coupon = {
+        code: vm.coupon_code,
+      };
+      vm.isLoading = true;
+      this.$http.post(api, { data: coupon }).then((response) => {
+        if (!response.data.success) {
+          this.$bus.$emit('message:push', response.data.message, 'danger');
+        }
+        vm.getCarts();
+        vm.isLoading = false;
+      });
     },
   },
   created() {

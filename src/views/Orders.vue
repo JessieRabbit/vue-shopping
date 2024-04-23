@@ -9,14 +9,14 @@
         <table class="table table-striped table-hover">
           <thead class="table-bg bg-secondary">
             <tr>
-              <th scope="col" class="text-white">購買時間</th>
-              <th scope="col" class="text-white">Email</th>
-              <th scope="col" class="text-white">購買款項</th>
-              <th scope="col" class="text-white">應付金額</th>
-              <th scope="col" class="text-white">是否付款</th>
+              <th scope="col" class="text-white detail">購買時間</th>
+              <th scope="col" class="text-white detail">Email</th>
+              <th scope="col" class="text-white detail">購買款項</th>
+              <th scope="col" class="text-white detail">應付金額</th>
+              <th scope="col" class="text-white detail">是否付款</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="orders">
             <tr class="pointer"
               v-for="item in orders" :key="item.id" @click.prevent="gotoOrderDetail(item.id)">
               <td>
