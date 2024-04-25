@@ -12,7 +12,8 @@
           <div class="col-md-12 col-lg-7">
             <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
             <h1 class="mb-5 display-3 text-primary">Organic Veggies & Fruits Foods</h1>
-            <div class="position-relative mx-auto">
+            <!-- 保留 -->
+            <!-- <div class="position-relative mx-auto">
               <input
                 class="form-control border-2 border-secondary
                 w-75 py-3 px-4 rounded-pill"
@@ -27,7 +28,7 @@
               >
                 Submit Now
               </button>
-            </div>
+            </div> -->
           </div>
           <div class="col-md-12 col-lg-5">
             <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
@@ -509,30 +510,6 @@ export default {
     goShopDetail(productId) {
       this.$router.push(`/shop-detail/${productId}`);
     },
-    // 加入購物車
-    // addtoCart(itemToAdd) {
-    // const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-    // const cart = {
-    //   product_id: itemToAdd.id,
-    //   qty: itemToAdd.qty || 1,
-    // };
-    // this.$http.post(api, { data: cart }).then((response) => {
-    //   if (response.data.success) {
-    //     this.$bus.$emit('message:push', response.data.message, 'success');
-    //     const itemInCart = this.cartItems.filter((item) => item.id === itemToAdd.id);
-    //     const isItemInCart = itemInCart.length > 0;
-    //     if (!isItemInCart) {
-    //       // https://contactmentor.com/add-property-to-object-javascript/
-    //       this.cartItems.push({ ...itemToAdd, qty: 1 });
-    //     } else {
-    //       if (itemToAdd.qty) {
-    //         itemInCart[0].qty += itemToAdd.qty;
-    //       }
-    //       itemInCart[0].qty += 1;
-    //     }
-    //   }
-    // });
-  // },
   },
   created() {
     this.getProducts();

@@ -516,7 +516,8 @@
   box-shadow: 0 0 0 0.25rem rgba(129,196,8,.25);
 }
 
-.table tr.pointer {
+.table tr.pointer,
+.search-pointer {
   cursor: pointer;
 }
 
@@ -542,4 +543,11 @@
 
 .totalAlign {
   padding-left: 30px !important;
+}
+
+.form-control {
+  &::placeholder {
+    color: var(--bs-gray);
+    opacity: 1;
+  }
 }

@@ -7,23 +7,29 @@
           <div class="top-info ps-2">
             <small class="me-3">
               <i class="fas fa-map-marker-alt me-2 text-secondary"></i>
-              <a href="javascript:void(0);" class="text-white">123 Street, New York</a>
+              <a href="javascript:void(0);" class="text-white">123 Street Tapiei</a>
             </small>
             <small class="me-3">
               <i class="fas fa-envelope me-2 text-secondary"></i>
-              <a href="javascript:void(0);" class="text-white">Email@Example.com</a>
+              <a href="javascript:void(0);" class="text-white">shenFamily@gmail.com</a>
             </small>
           </div>
           <div class="top-link pe-2">
-            <a href="javascript:void(0);" class="text-white">
-              <small class="text-white mx-2">Privacy Policy</small>/
-            </a>
-            <a href="javascript:void(0);" class="text-white">
-              <small class="text-white mx-2">Terms of Use</small>/
-            </a>
-            <a href="javascript:void(0);" class="text-white">
-              <small class="text-white ms-2">Sales and Refunds</small>
-            </a>
+            <router-link to="/privacyPolicy">
+              <a href="javascript:void(0);" class="text-white">
+                <small class="text-white mx-2">Privacy Policy</small>/
+              </a>
+            </router-link>
+            <router-link to="/termsOfUse">
+              <a href="javascript:void(0);" class="text-white">
+                <small class="text-white mx-2">Terms of Use</small>/
+              </a>
+            </router-link>
+            <router-link to="/salesAndRefunds">
+              <a href="javascript:void(0);" class="text-white">
+                <small class="text-white ms-2">Sales and Refunds</small>
+              </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -65,14 +71,15 @@
               </div> -->
             </div>
             <div class="d-flex m-3 me-0">
-              <button
+              <!-- 保留 -->
+              <!-- <button
                 class="btn-search btn border border-secondary
                 btn-md-square rounded-circle bg-white me-4"
                 data-bs-toggle="modal"
                 data-bs-target="#searchModal"
               >
                 <i class="fas fa-search text-primary"></i>
-              </button>
+              </button> -->
               <a href="javascript:void(0);" class="position-relative me-4 my-auto"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                 aria-controls="offcanvasRight"
@@ -86,9 +93,11 @@
                   {{ totalItems }}
                 </span>
               </a>
-              <a href="/login" class="my-auto" aria-label="Auto">
-                <i class="fas fa-user fa-2x"></i>
-              </a>
+              <router-link to="/login">
+                <a href="javascript:void(0);" class="my-auto" aria-label="Auto">
+                  <i class="fas fa-user fa-2x"></i>
+                </a>
+              </router-link>
             </div>
           </div>
         </nav>

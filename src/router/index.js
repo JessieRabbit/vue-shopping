@@ -15,6 +15,8 @@ import Orders from '@/views/Orders.vue';
 import OrderDetail from '@/views/OrderDetail.vue';
 import About from '@/views/About.vue';
 import PrivacyPolicy from '@/views/PrivacyPolicy.vue';
+import TermsOfUse from '@/views/TermsOfUse.vue';
+import SalesAndRefunds from '@/views/SalesAndRefunds.vue';
 
 Vue.use(VueRouter);
 
@@ -94,6 +96,16 @@ const routes = [
         path: 'privacyPolicy',
         name: 'PrivacyPolicy',
         component: PrivacyPolicy,
+      },
+      {
+        path: 'termsOfUse',
+        name: 'TermsOfUse',
+        component: TermsOfUse,
+      },
+      {
+        path: 'salesAndRefunds',
+        name: 'SalesAndRefunds',
+        component: SalesAndRefunds,
       },
     ],
   },

@@ -123,7 +123,15 @@
                         </td>
                         <td class="py-5">{{ item.product.price | currency }}</td>
                         <td class="py-5">{{ item.qty }}</td>
-                        <td class="py-5">{{ item.qty * item.product.price | currency }}</td>
+                        <td class="py-5">
+                          <p :class="{'text-decoration-line-through':
+                            item.final_total !== item.total}">
+                            {{ item.total | currency }}
+                          </p>
+                          <p v-if="item.final_total !== item.total">
+                            {{ item.final_total | currency }}
+                          </p>
+                        </td>
                       </tr>
                       <tr>
                         <th scope="row"></th>
@@ -340,6 +348,7 @@ export default {
     },
   },
   created() {
+    localStorage.removeItem('cart');
     this.getCarts();
   },
 };

@@ -11,8 +11,8 @@
             <thead>
               <tr>
                 <th scope="col" width="43%">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col" width="15%">Quantity</th>
+                <th scope="col">Quantity</th>
+                <th scope="col" width="15%">Price</th>
               </tr>
             </thead>
             <tbody>
@@ -24,7 +24,13 @@
                   <p class="mb-0 mt-4">{{ item.qty }}/{{ item.product.unit }}</p>
                 </td>
                 <td>
-                  <p class="mb-0 mt-4">{{ item.total | currency }}</p>
+                  <p class="mb-0 mt-4 text-dark"
+                    :class="{'text-decoration-line-through': item.final_total !== item.total}">
+                    {{ item.total | currency }}
+                  </p>
+                  <p class="mb-0 text-success" v-if="item.final_total !== item.total">
+                    {{ item.final_total | currency }}
+                  </p>
                 </td>
               </tr>
             </tbody>

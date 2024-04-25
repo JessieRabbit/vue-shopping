@@ -49,7 +49,8 @@
                 <p class="mb-0 mt-4">{{ item.product.price | currency }}</p>
               </td>
               <td>
-                <p class="mb-0 mt-4">{{ item.total | currency }}</p>
+                <p class="mb-0 mt-4" v-if="!item.final_total">{{ item.total | currency }}</p>
+                <p class="mb-0 mt-4" v-else>{{ item.final_total | currency }}</p>
               </td>
             </tr>
           </tbody>

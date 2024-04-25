@@ -34,7 +34,10 @@
                 </ul>
               </td>
               <td>
-                <p>{{ item.total | currency }}</p>
+                <p v-if="!item.final_total">{{ item.total | currency }}</p>
+                <p v-else>
+                    {{ item.final_total | currency }}
+                </p>
               </td>
               <td>
                 <span class="text-success fw-bolder" v-if="item.is_paid">已付款</span>

@@ -15,14 +15,15 @@
               <div class="position-relative mx-auto">
                 <input
                   class="form-control border-0 w-100 py-3 px-4 rounded-pill"
-                  type="number"
+                  type="email"
                   placeholder="Your Email"
                 />
                 <button
-                  type="submit"
+                  type="button"
                   class="btn btn-primary border-0
                   border-secondary py-3 px-4 position-absolute rounded-pill text-white"
                   style="top: 0; right: 0"
+                  data-bs-toggle="modal" data-bs-target="#emailModal"
                 >
                   Subscribe Now
                 </button>
@@ -51,7 +52,7 @@
             <div class="footer-item">
               <h4 class="text-light mb-3">Why People Like us!</h4>
               <p class="mb-4 text-truncate">
-                Jessie 蔬果行有別於一般菜商，有著集產地、批發商、菜商的角色，
+                樂月蔬果行有別於一般菜商，有著集產地、批發商、菜商的角色，
                 是少數能夠直接供應給各大蔬果行的業者，
                 Jessie 蔬果源自台北社子島發跡、產地自產自銷。
                 當時的時空環境
@@ -71,25 +72,40 @@
           <div class="col-lg-3 col-md-6">
             <div class="d-flex flex-column text-start footer-item">
               <h4 class="text-light mb-3">Shop Info</h4>
-              <a class="btn-link" href="/about">About Us</a>
-              <a class="btn-link" href="/contact">Contact Us</a>
-              <a class="btn-link" href="/privacyPolicy">Privacy Policy</a>
+              <router-link to="/about">
+                <a class="btn-link" href="javascript:void(0);">About Us</a>
+              </router-link>
+              <router-link to="/contact">
+                <a class="btn-link" href="javascript:void(0);">Contact Us</a>
+              </router-link>
+              <router-link to="/privacyPolicy">
+                <a class="btn-link" href="javascript:void(0);">Privacy Policy</a>
+              </router-link>
+              <router-link to="/termsOfUse">
+                <a class="btn-link" href="javascript:void(0);">Terms of Use</a>
+              </router-link>
+              <router-link to="/salesAndRefunds">
+                <a class="btn-link" href="javascript:void(0);">Sales and Refunds</a>
+              </router-link>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="d-flex flex-column text-start footer-item">
               <h4 class="text-light mb-3">Account</h4>
-              <a class="btn-link" href="">My Account</a>
-              <a class="btn-link" href="/orders">Order details</a>
-              <a class="btn-link" href="/shop">Shopping</a>
+              <router-link to="/orders">
+                <a class="btn-link" href="javascript:void(0);">Order details</a>
+              </router-link>
+              <router-link to="/shop">
+                <a class="btn-link" href="javascript:void(0);">Shopping</a>
+              </router-link>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="footer-item">
               <h4 class="text-light mb-3">Contact</h4>
-              <p>Address: 台北市汀州路一路240號</p>
+              <p>Address: 123 Street Tapiei.TAIWAN</p>
               <p>Email: shenFamily@gmail.com</p>
-              <p>Phone: +0123 4567 8910</p>
+              <p>Phone: (+886) 1234 5678</p>
               <p>Payment Accepted</p>
               <img src="@/assets/img/payment.png" class="img-fluid" alt="" />
             </div>
@@ -118,6 +134,19 @@
       </div>
     </div>
     <!-- Copyright End -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="emailModal" tabindex="-1"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <i class="fas fa-paper-plane fs-3 text-success"></i>
+            已成功訂閱電子報。
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

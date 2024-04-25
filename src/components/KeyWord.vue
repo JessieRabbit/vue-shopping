@@ -8,7 +8,7 @@
       aria-describedby="search-icon-1"
       v-model="keyword"
     />
-    <span id="search-icon-1" class="input-group-text p-3"
+    <span id="search-icon-1" class="input-group-text p-3 search-pointer"
       @click.prevent="$emit('checkProductsTilte', keyword)"
       @keyup.enter="$emit('checkProductsTilte', keyword)">
       <i class="fa fa-search"></i>

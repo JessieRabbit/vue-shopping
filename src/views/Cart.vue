@@ -166,10 +166,13 @@ export default {
           product_id: it.id,
           qty: it.qty,
         };
-        this.$http.post(api, { data: cart });
+        this.$http.post(api, { data: cart }).then((response) => {
+          if (response.data.success) {
+            // 解法 https://stackoverflow.com/questions/62462276/how-to-solve-avoided-redundant-navigation-to-current-location-error-in-vue
+            this.$router.push('/checkout/').catch(() => {});
+          }
+        });
       });
-
-      this.$router.push('/checkout/');
     },
   },
   created() {

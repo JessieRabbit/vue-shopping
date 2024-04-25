@@ -82,6 +82,10 @@ export default {
           return 'About';
         case 'PrivacyPolicy':
           return 'PrivacyPolicy';
+        case 'TermsOfUse':
+          return 'TermsOfUse';
+        case 'SalesAndRefunds':
+          return 'SalesAndRefunds';
         default:
           return '404 Error';
       }
@@ -180,6 +184,7 @@ export default {
     },
   },
   created() {
+    console.log('初始化測試');
     this.getTotalItems();
   },
 };
