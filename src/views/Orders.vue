@@ -26,7 +26,7 @@
                 <p class="mb-0 mt-4">{{ item.user.email }}</p>
               </td>
               <td>
-                <ul class="list-unstyled">
+                <ul class="list-unstyled mt-4">
                   <li v-for="(product, i) in item.products" :key="i">
                     {{ product.product.title }} 數量：{{ product.qty }}
                     {{ product.product.unit }}
@@ -34,14 +34,14 @@
                 </ul>
               </td>
               <td>
-                <p v-if="!item.final_total">{{ item.total | currency }}</p>
-                <p v-else>
+                <p class="mt-4" v-if="!item.final_total">{{ item.total | currency }}</p>
+                <p class="mt-4" v-else>
                     {{ item.final_total | currency }}
                 </p>
               </td>
               <td>
-                <span class="text-success fw-bolder" v-if="item.is_paid">已付款</span>
-                <span v-else>尚未啟用</span>
+                <span class="text-success fw-bolder mt-4" v-if="item.is_paid">已付款</span>
+                <span class="mt-4" v-else>尚未啟用</span>
               </td>
             </tr>
           </tbody>

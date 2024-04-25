@@ -218,7 +218,7 @@
                         </div>
                         <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                           <h4>{{ item.title }}</h4>
-                          <p>
+                          <p class="lineClamp">
                             {{ item.description}}
                           </p>
                           <div class="d-flex justify-content-between flex-lg-wrap">
@@ -267,7 +267,7 @@
           <div class="col-md-6 col-lg-4">
             <a href="javascript:void(0);">
               <div class="service-item bg-dark rounded border border-dark">
-                <img src="https://unsplash.com/photos/gLjy-OzY8j4/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8NTc0fHx8ZW58MHx8fHwxNzA3MjEzMjQ4fA&force=true&w=640" class="img-fluid rounded-top w-100" alt="" />
+                <img src="https://unsplash.com/photos/gLjy-OzY8j4/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8NTc0fHx8ZW58MHx8fHwxNzA3MjEzMjQ4fA&force=true&w=640" class="img-fluid rounded-top w-100 tastyHeight" alt="" />
                 <div class="px-4 rounded-bottom">
                   <div class="service-content bg-light text-center p-4 rounded">
                     <h5 class="text-primary">Tasty Fruits</h5>

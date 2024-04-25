@@ -49,8 +49,7 @@
               ></i>
               <div class="mb-4 pb-4 border-bottom border-secondary">
                 <p class="mb-0">
-                  很欣賞店家對品質的講究,原先在line客服臨時詢問當日是否有櫻桃禮盒,
-                  店家說中午會進貨,中午通知我因為品質不好沒有進貨,店家主動說要配合我明天送禮的時間提前交付給我
+                  I really appreciate the store's emphasis on quality.
                 </p>
               </div>
               <div class="d-flex align-items-center flex-nowrap">
@@ -84,7 +83,7 @@
               ></i>
               <div class="mb-4 pb-4 border-bottom border-secondary">
                 <p class="mb-0">
-                  很有質感的蔬果店價格透明，品質優良
+                  很有質感的蔬果店價格透明，品質優良，老闆一家人服務超級好!
                 </p>
               </div>
               <div class="d-flex align-items-center flex-nowrap">

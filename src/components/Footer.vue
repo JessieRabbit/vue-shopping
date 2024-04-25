@@ -51,7 +51,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="footer-item">
               <h4 class="text-light mb-3">Why People Like us!</h4>
-              <p class="mb-4 text-truncate">
+              <p class="mb-4 aboutlineClamp">
                 樂月蔬果行有別於一般菜商，有著集產地、批發商、菜商的角色，
                 是少數能夠直接供應給各大蔬果行的業者，
                 Jessie 蔬果源自台北社子島發跡、產地自產自銷。
@@ -63,10 +63,11 @@
                 改至目前南部產地專人種植、專人採買、產銷一條龍，
                 時至今日也有著 4、50 年累積的經驗。
               </p>
-              <a href="/about"
-                class="btn border-secondary py-2 px-4 rounded-pill text-primary">
-                Read More
-              </a>
+              <router-link to="/about">
+                <a class="btn border-secondary py-2 px-4 rounded-pill text-primary">
+                  Read More
+                </a>
+              </router-link>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">

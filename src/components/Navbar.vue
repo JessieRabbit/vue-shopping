@@ -124,7 +124,8 @@ export default {
     isCartIcon() {
       const vm = this;
       if (vm.currentPage === 'Cart' || vm.currentPage === 'Checkout'
-        || vm.currentPage === 'Pay' || vm.currentPage === 'Orders') {
+        || vm.currentPage === 'Pay' || vm.currentPage === 'Orders'
+        || !vm.currentPage) {
         return false;
       }
       return true;

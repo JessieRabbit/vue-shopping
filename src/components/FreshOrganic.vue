@@ -18,7 +18,7 @@
             </div>
             <div class="p-4 rounded-bottom">
               <h4>{{ item.title }}</h4>
-              <p>
+              <p class="lineClamp">
                 {{ item.description}}
               </p>
               <div class="d-flex justify-content-between flex-lg-wrap">

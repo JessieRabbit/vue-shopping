@@ -4,7 +4,7 @@
     <!-- Loading Spinner Start -->
     <Spinner :isLoading="isLoading"/>
     <!-- Loading Spinner End -->
-    <div class="container-fluid py-5 mt-5">
+    <div class="container-fluid pb-5">
       <div class="container py-5">
         <a
           href="javascript:void(0)"

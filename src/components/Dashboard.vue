@@ -184,7 +184,6 @@ export default {
     },
   },
   created() {
-    console.log('初始化測試');
     this.getTotalItems();
   },
 };
