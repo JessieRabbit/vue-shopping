@@ -3,9 +3,8 @@ const webpack = require('webpack');
 
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/vue-shopping/'
-    : '/',
+  // 佈署 https://tzuhui.io/2020/03/02/Vue/Vue-CLI3-to-github-pages/
+  publicPath: '/',
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
