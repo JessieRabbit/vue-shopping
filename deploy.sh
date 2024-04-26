@@ -9,6 +9,6 @@ cd dist
 git init
 git add -A
 git commit -m 'deploy'
-git push -f https://github.com/JessieRabbit/vue-dashboard-record.git master:gh-pages
+git push -f https://github.com/JessieRabbit/vue-shopping.git master:gh-pages
 
 cd -
