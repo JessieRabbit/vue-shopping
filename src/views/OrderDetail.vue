@@ -34,8 +34,8 @@
               <td>
                 <img
                   :src="item.product.imageUrl"
-                  class="img-fluid rounded-circle"
-                  style="width: 80px; height: 80px"
+                  class="rounded-circle orderImg"
+                  style="height: 80px"
                   alt=""
                 />
               </td>

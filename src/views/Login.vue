@@ -13,16 +13,18 @@
               </div>
             </div>
             <div>
-              <form action="" class="">
+              <form @submit.prevent="signin">
                 <input
                   type="text"
                   class="w-100 form-control border-0 py-3 mb-4"
                   placeholder="Enter Your Email"
+                  v-model="user.username"
                 />
                 <input
-                  type="email"
+                  type="password"
                   class="w-100 form-control border-0 py-3 mb-4"
                   placeholder="Password"
+                  v-model="user.password"
                 />
                 <input
                   type="checkbox"
@@ -34,7 +36,6 @@
                 <label class="form-check-label" for="Account-1">Remember me</label>
                 <button
                   class="w-100 btn form-control border-secondary py-3 mt-3 bg-white text-primary"
-                  type="submit"
                 >
                   Sing in
                 </button>
@@ -57,6 +58,27 @@ export default {
   components: {
     Navbar,
     Footer,
+  },
+  data() {
+    return {
+      user: {
+        username: '',
+        password: '',
+      },
+    };
+  },
+  methods: {
+    signin() {
+      const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;
+      const vm = this;
+      this.$http.post(api, vm.user).then((response) => {
+        if (response.data.success) {
+          const { token, expired } = response.data;
+          document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
+          vm.$router.push('/admin/products');
+        }
+      });
+    },
   },
 };
 </script>
