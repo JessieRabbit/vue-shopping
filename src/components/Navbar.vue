@@ -93,11 +93,19 @@
                   {{ totalItems }}
                 </span>
               </a>
-              <router-link to="/login">
-                <a href="javascript:void(0);" class="my-auto" aria-label="Auto">
-                  <i class="fas fa-user fa-2x"></i>
+              <template v-if="!isLogin">
+                <router-link to="/login">
+                  <a href="javascript:void(0);" class="my-auto" aria-label="Auto">
+                    <i class="fas fa-user fa-2x"></i>
+                  </a>
+                </router-link>
+              </template>
+              <template v-else>
+                <a href="javascript:void(0);" class="my-auto" aria-label="Auto"
+                  @click.prevent="logout">
+                  <i class="fas fa-door-closed fa-2x"></i>
                 </a>
-              </router-link>
+              </template>
             </div>
           </div>
         </nav>
@@ -120,12 +128,14 @@ export default {
     currentPage: String,
   },
   computed: {
+    isLogin() {
+      return JSON.parse(localStorage.getItem('login'));
+    },
     // 是否顯示購物車 icon
     isCartIcon() {
       const vm = this;
       if (vm.currentPage === 'Cart' || vm.currentPage === 'Checkout'
-        || vm.currentPage === 'Pay' || vm.currentPage === 'Orders'
-        || !vm.currentPage) {
+        || vm.currentPage === 'Pay' || !vm.currentPage) {
         return false;
       }
       return true;
@@ -152,6 +162,16 @@ export default {
         navheader.classList.remove('shadow');
         navheader.style.top = '0px';
       }
+    },
+    logout() {
+      const api = `${process.env.VUE_APP_API_PATH}/logout`;
+      const vm = this;
+      this.$http.post(api).then((response) => {
+        if (response.data.success) {
+          localStorage.removeItem('login');
+          vm.$router.push('/login');
+        }
+      });
     },
   },
   created() {

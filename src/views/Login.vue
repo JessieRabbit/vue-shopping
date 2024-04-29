@@ -4,7 +4,7 @@
   <div>
     <Navbar/>
     <div class="container-fluid contact py-5" style="margin-top: 152px">
-      <div class="container py-5" style="width: 60%">
+      <div class="container py-5">
         <div class="p-5 bg-light rounded">
           <div class="row g-4">
             <div class="col-12">
@@ -19,6 +19,7 @@
                   class="w-100 form-control border-0 py-3 mb-4"
                   placeholder="Enter Your Email"
                   v-model="user.username"
+                  name="username"
                 />
                 <input
                   type="password"
@@ -26,14 +27,15 @@
                   placeholder="Password"
                   v-model="user.password"
                 />
-                <input
+                <!-- 保留 -->
+                <!-- <input
                   type="checkbox"
                   class="form-check-input me-2"
                   id="Account-1"
                   name="Accounts"
                   value="Accounts"
                 />
-                <label class="form-check-label" for="Account-1">Remember me</label>
+                <label class="form-check-label" for="Account-1">Remember me</label> -->
                 <button
                   class="w-100 btn form-control border-secondary py-3 mt-3 bg-white text-primary"
                 >
@@ -75,7 +77,8 @@ export default {
         if (response.data.success) {
           const { token, expired } = response.data;
           document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
-          vm.$router.push('/admin/products');
+          localStorage.setItem('login', true);
+          vm.$router.push('/orders');
         }
       });
     },
