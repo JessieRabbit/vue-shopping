@@ -351,7 +351,7 @@
         <div class="text-center mx-auto mb-5" style="max-width: 700px">
           <h1 class="display-4">Bestseller Products</h1>
           <p>
-            種類豐富
+            暢銷蔬果種類豐富
           </p>
         </div>
         <div class="row g-4">
@@ -385,7 +385,7 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3"
-            v-for="(item, i) in products.slice(0,4)" :key="`md-${i}`">
+            v-for="(item, i) in products.slice(-4)" :key="`md-${i}`">
             <div class="text-center">
               <img :src="item.imageUrl" class="img-fluid rounded" alt="" />
               <div class="py-4">
